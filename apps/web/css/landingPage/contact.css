@@ -1,0 +1,252 @@
+/* ============================================= */
+/*              Contact Section Styles           */
+/* ============================================= */
+
+/* Contact Section & Form Styles */
+.contact {
+  background-color: #e4e5f1; /* Light lavender-gray */
+  padding: 20px;
+  text-align: center;
+}
+
+.contact-content {
+  max-width: 520px; /* Further reduced max-width for a sleeker form */
+  margin: 0 auto;
+  /* Removed background-color from here if it was previously set, section handles it */
+}
+
+.contact .section-title {
+  color: #484b6a;
+  margin-bottom: 15px;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.contact .section-subtitle {
+  color: #484b6a;
+  margin-bottom: 40px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.contact-form-card {
+  background-color: transparent; /* Make card background transparent */
+  padding: 20px; /* Adjust padding as needed, or remove if not necessary for layout */
+  border-radius: 12px;
+  box-shadow: none; /* Remove box shadow */
+  text-align: left;
+}
+
+.contact-form-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+}
+
+
+.contact-form-container {
+  /* No specific background or shadow needed here anymore */
+}
+
+.form-group {
+  margin-bottom: 20px; /* Adjusted spacing */
+  position: relative; /* For positioning icons */
+}
+
+.form-group label { 
+  display: none; /* Labels are removed from HTML, but this is a fallback */
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888; /* Icon color */
+  font-size: 0.9rem;
+}
+
+.form-group textarea + .input-icon, /* Specific for textarea icon */
+.textarea-icon { /* Class added to textarea icon for specific styling */
+  top: 20px; /* Adjust top position for textarea icon */
+  transform: translateY(0);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+  width: 100%;
+  padding: 15px 15px 15px 45px; /* Left padding for icon */
+  border: none; /* No border */
+  border-radius: 8px;
+  font-size: 0.95rem; /* Slightly smaller font in inputs */
+  color: #333;
+  background-color: #fdfdff; /* Very light, almost white background for inputs */
+  transition: background-color 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03) inset; /* Subtle inner shadow */
+}
+
+.form-group textarea {
+  padding-left: 45px; /* Ensure textarea also has left padding for icon */
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+  outline: none;
+  background-color: #fff; /* White background on focus */
+  box-shadow: 0 0 0 2px rgba(72, 61, 139, 0.2); /* Subtle focus ring, using button color base */
+}
+
+#contact-submit-btn {
+  background-color: #484b6a; /* Darkslateblue */
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+  display: flex; /* Use flex to align icon and text */
+  align-items: center;
+  justify-content: center;
+  width: 100%; 
+  margin-top: 20px;
+}
+
+#contact-submit-btn i {
+  margin-right: 8px; /* Space between icon and text */
+  font-size: 0.9em; /* Slightly smaller icon in button */
+}
+
+#contact-submit-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+}
+
+#contact-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Adjustments for placeholders to be a bit lighter and less prominent */
+::placeholder {
+  color: #aaa; /* Lighter placeholder text */
+  opacity: 1; 
+  font-size: 0.9rem;
+}
+
+:-ms-input-placeholder { 
+ color: #aaa;
+ font-size: 0.9rem;
+}
+
+::-ms-input-placeholder { 
+ color: #aaa;
+ font-size: 0.9rem;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    /* Allow wrapping on smaller screens */
+    margin-bottom: 2rem;
+    /* Add space below the links container */
+}
+
+.contact-link {
+    display: flex;
+    flex-direction: column;
+    /* Stack icon and text vertically */
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-sm);
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    min-width: 150px;
+    /* Ensure cards have some width */
+    text-align: center;
+}
+
+.contact-link i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    /* Space between icon and text */
+    text-shadow: none;
+    /* Remove text-shadow from icons if inherited */
+    color: #484b6a;
+}
+
+.contact-link .contact-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark-blue);
+    /* Darker text for label */
+    text-shadow: none;
+    /* Remove text-shadow from labels */
+}
+
+/* Hover Effects */
+.contact-link:hover {
+    transform: translateY(-5px);
+    /* Lift effect */
+    box-shadow: var(--box-shadow);
+    /* Stronger shadow on hover */
+    background-color: #f8f9fa;
+    /* Slightly change background */
+}
+
+/* Specific colors for icons on hover (optional) */
+.contact-link.email-link:hover i {
+    color: #d44638;
+    /* Example: Reddish for email */
+}
+
+.contact-link.discord-link:hover i {
+    color: #5865F2;
+    /* Discord purple */
+}
+
+.contact-link.facebook-link:hover i {
+    color: #1877F2;
+    /* Facebook blue */
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+    .contact-links {
+        gap: 1.5rem;
+    }
+
+    .contact-link {
+        padding: 1.2rem 1.5rem;
+        min-width: 120px;
+    }
+
+    .contact-link i {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-links {
+        flex-direction: column;
+        /* Stack links vertically */
+        align-items: center;
+        /* Center stack */
+        gap: 1rem;
+    }
+
+    .contact-link {
+        width: 80%;
+        /* Make cards wider in vertical stack */
+        max-width: 250px;
+    }
+}

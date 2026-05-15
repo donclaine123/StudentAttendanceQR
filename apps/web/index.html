@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EazyAttend - Effortless Attendance Tracking</title>
+  <link rel="stylesheet" href="./css/landpage.css">
+  <script src="./js/config.js"></script>
+  <script src="./js/main.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="index.html">
+            <svg class="sidebar-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="vertical-align: middle;"> 
+                 <rect x="5" y="5" width="90" height="90" rx="25" ry="25" fill="#484b6a"/>
+                 <rect x="25" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+                 <rect x="55" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+                 <rect x="25" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+                 <rect x="55" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+            </svg>
+            <span>EazyAttend</span>
+          </a>
+        </div>
+        
+        <div class="nav-links">
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#how-it-works" class="nav-link">How It Works</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        
+        <div class="nav-actions">
+          <a href="pages/login.html" class="outline-btn">Login</a>
+         
+        </div>
+        
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Effortless<br>Attendance Tracking</h1>
+        <p class="hero-text">
+          EazyAttend simplifies student attendance with a quick scan of a QR code. Say goodbye to paper-based methods and hello to accurate, real-time tracking.
+        </p>
+        
+        <div class="hero-buttons">
+          <a href="pages/login.html" class="primary-btn">Get Started Now</a>
+          <a href="#how-it-works" class="outline-btn">How It Works</a>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features scroll-animate">
+      <h2 class="section-title">Key Features</h2>
+      <p class="section-subtitle">EazyAttend is packed with features to make attendance a breeze for both students and faculty.</p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-qrcode"></i>
+          </div>
+          <h3>Quick Scan & Go</h3>
+          <p>Students simply scan a QR code upon entering class, marking their attendance instantly.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <h3>Detailed Reports</h3>
+          <p>Teachers gain access to in-depth attendance reports, including attendance history, absences, and trends.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-desktop"></i>
+          </div>
+          <h3>User-Friendly Interface</h3>
+          <p>EazyAttend is designed for simplicity. Navigating the system is intuitive for all users, regardless of their technical expertise.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works scroll-animate">
+      <h2 class="section-title">How EazyAttend Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-icon">👩‍🏫</div>
+          <h3>Teacher Generates QR Code</h3>
+          <p>Instructor creates a unique QR code for each class, easily shared via screen display.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-icon">📱</div>
+          <h3>Students Scan & Check In</h3>
+          <p>Students use the EazyAttend app to scan the QR code, registering their presence in seconds.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-icon">💾</div>
+          <h3>Automatic Attendance Records</h3>
+          <p>Attendance is automatically recorded in a secure online database, accessible for reporting and insights.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact scroll-animate">
+      <div class="contact-content">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Have questions or feedback? Fill out the form below, and we'll get back to you as soon as possible.</p>
+        
+        <div class="contact-form-card">
+          <form id="contact-form" class="contact-form-container">
+            <div id="contact-form-status" class="form-status-message" role="alert"></div>
+
+            <div class="form-group">
+              <i class="fas fa-user input-icon"></i>
+              <input type="text" id="contact-name" name="name" placeholder="Full Name" required>
+            </div>
+            
+            <div class="form-group">
+              <i class="fas fa-envelope input-icon"></i>
+              <input type="email" id="contact-email" name="email" placeholder="Email Address" required>
+            </div>
+            
+            <div class="form-group">
+              <i class="fas fa-tag input-icon"></i>
+              <input type="text" id="contact-subject" name="subject" placeholder="Subject" required>
+            </div>
+            
+            <div class="form-group">
+              <i class="fas fa-comment-dots input-icon textarea-icon"></i>
+              <textarea id="contact-message" name="message" rows="5" placeholder="Your message here..." required></textarea>
+            </div>
+            
+            <button type="submit" id="contact-submit-btn" class="primary-btn">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- End app-container -->
+</body>
+</html>

@@ -1,0 +1,1551 @@
+/* Base Styles and Variables */
+:root {
+  --color-bg: #fafafa;
+  --color-light: #e4e5f1;
+  --color-medium: #d2d3db;
+  --color-dark: #9394a5;
+  --color-darkest: #484b6a;
+  --color-sidebar: #484b6a;
+  --color-accent: #6366f1;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-darkest);
+  line-height: 1.6;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  border-bottom: 1px solid var(--color-light);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Remove or adjust the old rule as it targeted a div */
+/* 
+.logo-icon {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--color-sidebar);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+*/
+
+/* Optional: Add specific styling for the SVG if needed, 
+   though width/height attributes might suffice */
+.logo svg.sidebar-logo-svg {
+    /* Example: ensure vertical alignment if needed */
+    vertical-align: middle; 
+    transition: transform 0.3s ease; /* Add transition for hover effect */
+}
+
+/* Hover effect for the SVG logo */
+.logo:hover svg.sidebar-logo-svg {
+    transform: scale(1.1) rotate(-5deg); /* Scale up and tilt slightly */
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  color: var(--color-darkest);
+  font-weight: 600;
+  transition: transform 0.3s ease; /* Add transition for hover */
+  display: inline-block; /* Needed for transform */
+}
+
+/* Hover effect for the H1 title */
+.logo:hover h1 {
+    transform: scale(1.05); /* Scale up slightly */
+}
+
+.logout a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-darkest);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.logout a:hover {
+  color: var(--color-danger);
+}
+
+/* Target the icon specifically */
+.logout a i {
+  transition: transform 0.2s ease-in-out;
+  display: inline-block;
+}
+
+.logout a:hover i {
+  transform: translateX(3px);
+}
+
+.logout a:active i {
+  transform: translateX(6px);
+}
+
+/* --- New Header Dropdown Styles (Teacher) --- */
+.header-right {
+    /* Container for the menu */
+}
+
+.user-menu {
+    position: relative; /* Needed for dropdown positioning */
+    display: inline-block;
+}
+
+.user-menu-trigger {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-light);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--color-darkest);
+    transition: background-color 0.2s ease;
+}
+
+.user-menu-trigger:hover {
+    background-color: var(--color-light);
+}
+
+.user-menu-trigger i.fa-cog {
+    color: var(--color-darkest);
+}
+
+.user-menu-trigger i.fa-chevron-down {
+    font-size: 0.8em;
+    margin-left: auto; /* Push arrow to the right */
+    color: var(--color-dark);
+    transition: transform 0.2s ease;
+}
+
+.user-menu-trigger:focus + .user-menu-dropdown,
+.user-menu-dropdown.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-menu-dropdown {
+    position: absolute;
+    top: calc(100% + 5px); /* Position below the trigger */
+    right: 0;
+    background-color: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    min-width: 180px;
+    z-index: 110; /* Ensure it's above other content */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    border: 1px solid var(--color-light);
+    overflow: hidden; /* Ensure border-radius applies */
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: var(--color-darkest);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item i {
+    width: 1.2em;
+    text-align: center;
+    color: var(--color-dark);
+}
+
+.dropdown-item:hover {
+    background-color: var(--color-light);
+    color: var(--color-accent);
+}
+
+.dropdown-item:hover i {
+    color: var(--color-accent);
+}
+/* --- End New Header Dropdown Styles --- */
+
+/* Content Wrapper - UPDATED */
+.content-wrapper {
+  display: flex;
+  flex: 1;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+/* Sidebar Styles - UPDATED */
+.sidebar {
+  width: 250px;
+  background-color: var(--color-sidebar);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius);
+  margin-top: 0.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 4.5rem;
+  transition: all 0.3s ease;
+  animation: glow 3s infinite;
+}
+
+.sidebar:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.sidebar nav ul {
+  list-style: none;
+}
+
+/* Nav Item Styles - UPDATED */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid transparent;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid rgba(255, 255, 255, 0.5);
+}
+
+.nav-item.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 4px solid white;
+}
+
+.nav-item i {
+  font-size: 1.2rem;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.copyright {
+  padding: 1rem 1.5rem;
+  font-size: 0.75rem;
+  color: var(--color-medium);
+  text-align: center;
+}
+
+/* Main Content Styles - UPDATED */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  padding: 0 0.5rem;
+}
+
+.page {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-darkest);
+}
+
+.page-header p {
+  color: var(--color-dark);
+}
+
+/* Dashboard Page Styles */
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-info h3 {
+  font-size: 0.875rem;
+  color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-darkest);
+  margin-bottom: 0.5rem;
+}
+
+.stat-change {
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.stat-change.positive {
+  color: var(--color-success);
+}
+
+.stat-change.negative {
+  color: var(--color-danger);
+}
+
+.stat-icon {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--color-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--color-darkest);
+}
+
+.records-section {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-light);
+}
+
+.section-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.refresh-btn {
+  background: none;
+  border: none;
+  color: var(--color-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.refresh-btn:hover {
+  color: var(--color-accent);
+}
+
+.refresh-btn i {
+  transition: transform 0.3s ease;
+}
+
+.refresh-btn:hover i {
+  transform: rotate(180deg);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.records-table th,
+.records-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.records-table th {
+  background-color: var(--color-light);
+  font-weight: 600;
+  color: var(--color-darkest);
+  font-size: 0.875rem;
+}
+
+.records-table tr {
+  border-bottom: 1px solid var(--color-light);
+  transition: var(--transition);
+}
+
+.records-table tr:hover {
+  background-color: var(--color-bg);
+}
+
+/* Style for the active status badge */
+.status-badge-active {
+    display: inline-block;
+    padding: 0.25rem 0.75rem; /* Adjust padding */
+    border-radius: var(--radius);
+    background-color: var(--color-success);
+    color: white;
+    font-weight: 500;
+    font-size: 0.8rem; /* Slightly smaller font */
+  text-align: center;
+}
+
+/* Optional: Style for expired status if needed */
+.status-expired {
+    color: var(--color-dark); /* Example: Grey color */
+    font-style: italic;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.status-badge.success {
+  background-color: var(--color-success);
+  color: white;
+}
+
+.status-badge.warning {
+  background-color: var(--color-warning);
+  color: white;
+}
+
+/* Generate QR Page Styles */
+.qr-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  color: var(--color-darkest);
+}
+
+.qr-settings, .qr-preview {
+  background-color: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.qr-settings h3, .qr-preview h3 {
+    display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-darkest);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-medium);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+  transition: var(--transition);
+  /* Add appearance none to hide default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Ensure padding leaves space for the custom arrow */
+  padding-right: 2.5rem; /* Adjust as needed */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper i {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-dark);
+  pointer-events: none;
+}
+
+.checkbox-wrapper {
+    display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  width: auto;
+}
+
+.qr-code-container {
+  display: flex;
+  align-items: center;
+    justify-content: center;
+  height: 250px;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+}
+
+.qr-placeholder {
+  font-size: 5rem;
+  color: var(--color-medium);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.generate-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #484b6a;
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.generate-btn:hover {
+  background-color: #9394a5;
+  transform: translateY(-2px);
+}
+
+/* Classes Page Styles */
+.classes-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.add-class-form, .class-list {
+  background-color: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.add-class-form h3, .class-list h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-darkest);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.add-class-btn {
+  padding: 0.75rem;
+  background-color: var(--color-darkest);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+    width: 100%;
+  }
+
+.add-class-btn:hover {
+  background-color: #191568;
+  transform: translateY(-2px);
+}
+
+/* --- Styling for the Class List Container --- */
+.class-list .classes-list-container {
+    max-height: 450px; /* Adjust as needed */
+    overflow-y: auto;
+    padding-right: 5px; /* Add a little padding so scrollbar doesn't overlap content */
+}
+
+/* Thin scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+.class-list .classes-list-container::-webkit-scrollbar {
+    width: 5px; /* Width of the scrollbar */
+}
+
+.class-list .classes-list-container::-webkit-scrollbar-track {
+    background: var(--color-bg); /* Match the page background */
+    border-radius: 10px;
+}
+
+.class-list .classes-list-container::-webkit-scrollbar-thumb {
+    background-color: var(--color-medium); /* Color of the scroll thumb */
+    border-radius: 10px;
+    border: 1px solid var(--color-bg); /* Optional: Creates padding around thumb */
+}
+
+.class-list .classes-list-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-dark); /* Darker thumb on hover */
+}
+/* --- End Styling for Class List Container --- */
+
+.class-card {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--color-light);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  transition: var(--transition);
+}
+
+.class-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.class-badge {
+  background-color: var(--color-sidebar);
+  color: white;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  min-width: 3.5rem;
+  text-align: center;
+}
+
+.class-details {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.class-details h4 {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.class-details p {
+  font-size: 0.875rem;
+  color: var(--color-dark);
+}
+
+.delete-btn {
+  background-color: var(--color-danger);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Attendance Page Styles */
+.attendance-content {
+  background-color: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.attendance-filters h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+}
+
+.attendance-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.export-btn {
+  background-color: var(--color-darkest);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.export-btn:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+/* Home Page Styles */
+.home-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.quick-guide, .home-stats {
+  background-color: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.quick-guide h3, .home-stats h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--color-darkest);
+}
+
+.guide-steps {
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.guide-steps li {
+  margin-bottom: 0.75rem;
+}
+
+.highlight {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.stat-item h4 {
+  text-align: center;
+  color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+
+.big-number {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-darkest);
+}
+
+.help-links {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.help-links li {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.help-links a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.help-links a:hover {
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 10px rgba(72, 75, 106, 0.1); }
+  50% { box-shadow: 0 0 15px rgba(72, 75, 106, 0.2); }
+  100% { box-shadow: 0 0 10px rgba(72, 75, 106, 0.1); }
+}
+
+.stat-card, .qr-settings, .qr-preview, .add-class-form, .class-list, .attendance-content, .quick-guide, .home-stats {
+  animation: scaleIn 0.5s ease;
+}
+
+.nav-item {
+  animation: slideIn 0.3s ease;
+  animation-fill-mode: both;
+}
+
+.nav-item:nth-child(1) { animation-delay: 0.1s; }
+.nav-item:nth-child(2) { animation-delay: 0.2s; }
+.nav-item:nth-child(3) { animation-delay: 0.3s; }
+.nav-item:nth-child(4) { animation-delay: 0.4s; }
+.nav-item:nth-child(5) { animation-delay: 0.5s; }
+
+/* Responsive adjustments for the floating sidebar */
+@media (max-width: 768px) {
+  .content-wrapper {
+      flex-direction: column;
+      padding: 1rem;
+  }
+
+  .sidebar {
+      width: 100%;
+      height: auto;
+  position: relative;
+      top: 0;
+      margin-bottom: 1rem;
+      padding: 1rem 0;
+  }
+
+  .nav-item {
+      padding: 0.75rem 1rem;
+      justify-content: flex-start;
+  }
+
+  .nav-item span {
+      display: inline-block;
+  }
+
+  .nav-item i {
+      font-size: 1.2rem;
+      width: 1.5rem;
+  }
+
+  .copyright {
+  display: block;
+      padding: 0.5rem 1rem;
+  }
+
+  .stats-cards {
+      display: flex;           /* Change to flex for horizontal layout */
+      overflow-x: auto;        /* Enable horizontal scrolling */
+      padding-bottom: 1rem;    /* Add space below for potential scrollbar (even if hidden) */
+      scroll-snap-type: x mandatory; /* Optional: Snap scrolling */
+      flex-wrap: nowrap;         /* Prevent cards from wrapping */
+      
+      /* Hide scrollbar */
+      scrollbar-width: none;  /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .stats-cards::-webkit-scrollbar {
+    display: none; /* WebKit browsers (Chrome, Safari, Edge) */
+  }
+
+  .stats-cards .stat-card {
+    min-width: 240px;    /* Ensure cards have a minimum width */
+    flex-shrink: 0;      /* Prevent cards from shrinking */
+    scroll-snap-align: start; /* Optional: Snap alignment */
+  }
+}
+
+/* Notification system styles */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  z-index: 1000;
+  transform: translateX(20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.notification.success i { color: #10b981; }
+.notification.error i { color: #ef4444; }
+.notification.warning i { color: #f59e0b; }
+.notification.info i { color: #3b82f6; }
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #484b6a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.generated-qr {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 1px;
+}
+
+.qr-cell {
+  width: 8px;
+  height: 8px;
+  background-color: white;
+}
+
+.qr-cell.filled {
+  background-color: #484b6a;
+}
+
+/* --- QR Display Area Styles --- */
+.qr-display-area {
+  min-height: 300px; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px dashed var(--color-medium); /* Add a subtle border */
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  background-color: var(--color-bg);
+}
+
+/* Center the QR code image/canvas */
+#qr-code-image-wrapper {
+    display: flex; /* Use flex to center the image */
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem; /* Add some space below the QR code */
+    min-height: 200px; /* Ensure space even before QR loads */
+}
+
+#qr-info {
+    margin-bottom: 0.5rem; /* Space below class info */
+    color: var(--color-darkest); /* Ensure text is dark */
+    font-weight: 500;
+}
+
+#qr-timer-progress {
+    margin-bottom: 1.5rem; /* Space below timer/progress */
+    width: 100%; /* Make timer container take full width */
+}
+
+/* Center the remaining button */
+#qr-actions {
+  display: flex;
+    justify-content: center;
+    width: 100%; /* Take full width */
+}
+
+.qr-placeholder i {
+  font-size: 1rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.loading-state .loading-spinner,
+.error-message.centered-text p {
+  font-size: 1rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+#expires-text {
+  transition: width 0.5s ease-out;
+}
+
+.progress-bar.expired {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  margin-top: 1.5rem; /* Increased margin */
+}
+
+/* Specific button colors - Ensure these match the image if needed */
+.btn-secondary {
+    background-color: #6c757d; /* Example grey */
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-warning {
+  background-color: var(--color-warning);
+  color: var(--color-white);
+}
+.btn-warning:hover {
+  background-color: #d97706;
+}
+
+/* Style for the primary action button */
+.btn-primary {
+    background-color: var(--color-darkest);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #46e56b; /* Darker accent */
+}
+
+/* Style for danger action button */
+.btn-danger {
+    background-color: var(--color-danger);
+    color: white;
+}
+.btn-danger:hover {
+    background-color: #dc2626; /* Darker danger */
+}
+
+/* Adjustments for buttons within the active sessions table */
+.records-table .action-btn {
+    /* Ensure consistent vertical alignment if needed */
+    vertical-align: middle; 
+    /* Explicitly set padding and border-radius to ensure consistency */
+    padding: 5px; 
+    border-radius: var(--radius); 
+    margin-bottom: 5px;
+    border: none;
+}
+
+.records-table .delete-btn {
+    margin-left: 0.5rem; /* Add space between Show QR and Delete */
+}
+
+/* Ensure btn class provides base styling */
+.btn {
+  padding: 0.6rem 1.2rem; /* Adjust padding */
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500; /* Slightly bolder */
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* Space between icon and text */
+  font-size: 0.9rem; /* Adjust font size */
+}
+
+.btn .btn-icon {
+    margin-right: 0; /* Remove default margin if using gap */
+    font-size: 1em; /* Adjust icon size slightly */
+}
+
+/* --- End QR Display Area Styles --- */
+
+/* Styling for dynamically added Section Choice Buttons */
+#section-buttons-container {
+  display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem; /* Spacing between buttons */
+}
+
+.section-choice-btn {
+    /* Inherits base .btn styles */
+    background-color: var(--color-light); /* Lighter background */
+    color: var(--color-darkest); /* Darker text */
+    border: 1px solid var(--color-medium); /* Subtle border */
+    padding: 0.5rem 1rem; /* Adjust padding */
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.section-choice-btn:hover {
+    background-color: var(--color-medium); /* Darken slightly on hover */
+    color: var(--color-darkest);
+    border-color: var(--color-dark);
+}
+
+/* Optional: Style for a selected section button */
+.section-choice-btn.selected {
+    background-color: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+}
+
+/* --- Status Modal Styles --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px); /* Add blur effect */
+  -webkit-backdrop-filter: blur(4px); /* Safari prefix */
+  opacity: 0; /* Start transparent */
+  transition: opacity 0.3s ease; /* Fade-in transition */
+  visibility: hidden; /* Start hidden */
+}
+
+.modal-overlay.visible {
+  display: flex; /* Use flex to enable justify/align */
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Add proper styling for status modal content */
+#status-modal-content {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+  width: 320px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+#status-modal-icon-container {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#status-modal-message {
+  color: var(--color-darkest);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Specific styling for success icon in the modal */
+.status-icon.success {
+  color: var(--color-success);
+  font-size: 2.5rem;
+}
+
+/* Specific styling for error icon in the modal */
+.status-icon.error {
+  color: var(--color-danger);
+  font-size: 2.5rem;
+}
+
+/* --- New Attendance View Styles --- */
+.attendance-view {
+  display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Space between rows */
+}
+
+.attendance-row {
+    display: flex;
+    gap: 1.5rem; /* Space between subject/date containers */
+}
+
+.attendance-selector-container,
+.attendance-display-container {
+    flex: 1; /* Allow containers in a row to share space */
+    /* Inherits .card styles */
+}
+
+.attendance-selector-container.full-width,
+.attendance-display-container.full-width {
+    flex-basis: 100%; /* Make section/attendee containers span full width */
+}
+
+.attendance-selector-container .selector-content {
+  display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem; /* Space between selection boxes */
+    min-height: 60px; /* Ensure container has some height */
+    align-content: flex-start; /* Align items to the top */
+}
+
+.selector-box {
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--color-medium);
+    border-radius: var(--radius);
+    background-color: var(--color-bg);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    font-weight: 500;
+}
+
+.selector-box:hover {
+    background-color: var(--color-light);
+    border-color: var(--color-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.selector-box.selected {
+    background-color: var(--color-darkest);
+    color: white;
+    border-color: var(--color-accent);
+    font-weight: 600;
+}
+
+.placeholder-text {
+    color: var(--color-dark);
+    font-style: italic;
+    width: 100%; /* Span full width */
+    text-align: center;
+    padding: 1rem 0;
+}
+
+/* Hide export button initially */
+#attendance-attendees .export-btn {
+    display: none; 
+}
+
+/* --- End New Attendance View Styles --- */
+
+/* --- Calendar Styles --- */
+#calendar-container {
+    /* Container styling if needed, e.g., padding is already set inline */
+}
+
+#calendar-header {
+  display: flex;
+    justify-content: space-between;
+  align-items: center;
+    padding: 0.5rem 0.75rem; /* Adjust padding */
+    margin-bottom: 0.5rem;
+}
+
+#month-year {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-darkest);
+}
+
+.calendar-nav-btn {
+    background: none;
+    border: 1px solid var(--color-medium);
+  border-radius: 50%;
+    color: var(--color-dark);
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 28px; /* Fixed size */
+    height: 28px;
+    display: inline-flex;
+  align-items: center;
+  justify-content: center;
+    transition: var(--transition);
+}
+
+.calendar-nav-btn:hover {
+    background-color: var(--color-light);
+    color: var(--color-accent);
+    border-color: var(--color-dark);
+}
+
+.calendar-nav-btn:active {
+    transform: scale(0.95);
+}
+
+#calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-dark);
+    padding: 0.25rem 0;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--color-light);
+}
+
+#calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px; /* Small gap between days */
+}
+
+.calendar-day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    height: 36px; /* Adjust height as needed */
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    transition: var(--transition);
+    cursor: default; /* Default cursor */
+    position: relative; /* For potential ::after elements */
+}
+
+.day-in-month {
+    color: var(--color-darkest);
+}
+
+.day-out-month {
+    color: var(--color-medium);
+    /* Optional: hide or make less prominent */
+    /* opacity: 0.6; */
+}
+
+.calendar-day.has-attendance {
+    background-color: lightgreen; /* Light background for available dates */
+    border: 1px solid var(--color-medium);
+    font-weight: 500;
+    cursor: pointer; /* Make clickable */
+}
+
+.calendar-day.has-attendance:hover {
+    background-color: var(--color-medium);
+    color: var(--color-darkest);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Indicator dot using ::after pseudo-element (Alternative to background) */
+/* .calendar-day.has-attendance::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+} */
+
+.calendar-day.selected-date {
+    background-color: var(--color-darkest);
+    border-color: var(--color-accent);
+    font-weight: 600;
+    color: white;
+}
+
+.calendar-day.today {
+    font-weight: bold;
+    border: 1px solid var(--color-darkest); /* Highlight today */
+    color: var(--color-accent);
+}
+
+/* Remove rules hiding calendar initially */
+/* 
+#calendar-header,
+#calendar-weekdays,
+#calendar-days {
+    display: none; 
+}
+
+#calendar-placeholder {
+  display: block;
+} 
+*/
+/* --- End Calendar Styles --- */
+
+/* --- Full Page Loader Styles --- */
+.page-loader-overlay {
+    position: fixed; /* Cover the viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top of everything */
+    transition: opacity 0.3s ease-out; /* Smooth fade-out */
+    opacity: 1; /* Start visible */
+}
+
+.page-loader-overlay.hidden {
+  opacity: 0;
+    pointer-events: none; /* Allow interaction with content below after hiding */
+}
+
+/* Adjust spinner size if needed for full page */
+.page-loader-overlay .loading-spinner {
+    width: 60px; 
+    height: 60px;
+    border-width: 5px;
+}
+/* --- End Full Page Loader Styles --- */
+
+/* Styling for the actual modal content box */
+#teacher-profile-modal-content {
+    background-color: white;
+    padding: 2rem; /* Increased padding */
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    position: relative; /* Needed for absolute positioning of close button */
+    width: 90%; /* Responsive width */
+    max-width: 500px; /* Max width */
+    animation: scaleIn 0.3s ease; /* Add pop-in animation */
+}
+
+/* Style the close button */
+.modal-content .close-modal-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.modal-content .close-modal-btn:hover {
+    color: var(--color-darkest);
+}
+
+/* Optional: Style the profile title */
+.modal-content .profile-title {
+    margin-top: 0; /* Remove default margin if any */
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    color: var(--color-darkest);
+    text-align: center; /* Center title */
+    display: flex; /* Align icon and text */
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.stats-cards .stat-card .stat-icon {
+  font-size: 1.8rem;
+  color: var(--color-primary-light);
+}

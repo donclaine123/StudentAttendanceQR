@@ -1,0 +1,166 @@
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .app-container {
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .features-grid,
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .section-title {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Navbar adjustments */
+  .nav-links,
+  .nav-actions .outline-btn { /* Hide desktop login button */
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block; /* Show burger icon */
+  }
+
+  .navbar.active .nav-links { /* Show links when mobile menu is active */
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* Adjust as needed based on navbar height */
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    align-items: center;
+  }
+
+  .nav-links a {
+    margin: 10px 0;
+    font-size: 18px; /* Adjust font size for mobile */
+  }
+
+  .nav-actions {
+     display: flex; /* Ensure mobile login/signup can be shown if needed later */
+     /* We might add mobile-specific buttons here later if desired */
+  }
+  .nav-actions .outline-btn {
+      /* Keep hidden on mobile for now, only showing burger */
+      display: none;
+  }
+
+  /* Hero section adjustments */
+  .hero {
+    text-align: center;
+    padding: 80px 20px 40px; /* Adjust padding */
+  }
+
+  .hero-content h1 {
+    font-size: 40px; /* Decrease font size */
+    line-height: 1.1;
+  }
+
+  .hero-text {
+    font-size: 16px; /* Adjust paragraph font size */
+    margin: 20px auto;
+  }
+
+  .hero-buttons {
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center;
+  }
+
+  .hero-buttons a {
+    width: 80%; /* Make buttons wider */
+    margin: 10px 0; /* Adjust spacing */
+    text-align: center;
+  }
+
+  /* Existing rules */
+  .features-grid,
+  .steps {
+    display: flex; /* Ensure flex is used */
+    flex-direction: column; /* Stack items vertically */
+    gap: 1.5rem; /* Adjust gap for vertical stacking */
+  }
+
+  .step {
+     margin-bottom: 2rem; /* Add space below each step */
+     flex: none; 
+     width: 90%; /* Optional: control width */
+     margin-left: auto;
+     margin-right: auto;
+  }
+  .step:last-child {
+      margin-bottom: 0; /* Remove margin from the last step */
+  }
+  
+  .section-title {
+    font-size: 32px;
+  }
+  
+  .features,
+  .how-it-works {
+    padding: 60px 20px;
+  }
+  
+  .nav-container {
+    padding: 0 20px;
+  }
+  
+  .hero-content {
+    padding: 0 20px;
+  }
+
+   /* Contact section adjustments */
+  .contact-links {
+    flex-direction: column; /* Stack contact links */
+    align-items: center;
+  }
+
+  .contact-link {
+    margin: 10px 0; /* Add vertical spacing */
+    width: 60%; /* Give links more width */
+    justify-content: center; /* Center icon and text */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for very small screens */
+  .hero-content h1 {
+    font-size: 32px; /* Further reduce heading size */
+  }
+
+  .hero-text {
+    font-size: 14px; /* Further reduce text size */
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .primary-btn,
+  .outline-btn {
+    padding: 10px 20px; /* Slightly smaller buttons */
+    font-size: 14px;
+  }
+
+  .nav-container {
+    padding: 0 16px;
+  }
+  
+  .features,
+  .how-it-works {
+    padding: 40px 16px;
+  }
+
+   .contact-link {
+    width: 80%; /* Increase width further */
+  }
+}

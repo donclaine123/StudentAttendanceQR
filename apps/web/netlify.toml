@@ -1,0 +1,21 @@
+# Netlify configuration file
+
+# Proxy configuration to forward API requests to Railway backend
+[[redirects]]
+  from = "/api/*"
+  to = "https://qrattendance-backend.onrender.com/:splat"
+  status = 200
+  force = true
+  
+  # Headers to enable CORS
+  [redirects.headers]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization, X-Requested-With, Accept, X-User-ID, X-User-Role"
+    Access-Control-Allow-Credentials = "true"
+
+# Handle routing for single-page application
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 

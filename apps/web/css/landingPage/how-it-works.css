@@ -1,0 +1,62 @@
+/* How It Works Section */
+.how-it-works {
+  padding: 80px 40px;
+  background-color: var(--light-gray);
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.step {
+  flex: 1;
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: var(--box-shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: var(--dark-gray);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.step-icon {
+  font-size: 32px;
+  margin: 20px 0;
+}
+
+.step h3 {
+  font-size: 20px;
+  color: var(--dark-blue);
+  margin-bottom: 16px;
+}
+
+.step p {
+  color: var(--dark-gray);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* Hover Effect */
+.step:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow);
+}

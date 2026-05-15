@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - EazyAttend</title>
+  <link rel="stylesheet" href="../css/student-dashboard.css">
+  <link rel="stylesheet" href="../vendor/fontawesome/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+  <link rel="icon" href="data:," />
+</head>
+
+<body>
+  <div class="dashboard-new">
+    <!-- New Top Navigation Header -->
+    <header class="main-header">
+      <div class="header-left">
+        <a href="../index.html" class="school-info-link">
+          <svg class="sidebar-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+             <rect x="5" y="5" width="90" height="90" rx="25" ry="25" fill="#484b6a"/>
+             <rect x="25" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+             <rect x="55" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+             <rect x="25" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+             <rect x="55" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+          </svg>
+          <div class="app-title-wrapper">
+            <span class="sidebar-app-name">EazyAttend</span>
+            <span class="app-subtitle">Smart Attendance</span>
+      </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <div class="user-menu">
+          <button class="user-menu-trigger" id="user-menu-trigger">
+            <i class="fas fa-cog"></i> 
+            <span class="user-name-display">Menu</span> 
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="user-menu-dropdown" id="user-menu-dropdown">
+            <a href="#profile-section" class="dropdown-item" id="nav-profile"> <!-- Reused ID -->
+              <i class="fas fa-user-edit"></i> Edit Profile
+            </a>
+            <a href="#" class="dropdown-item" id="logout-btn"> <!-- Reused ID -->
+               <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- End Top Navigation Header -->
+
+    <!-- Removed Old Sidebar -->
+
+    <!-- Main Content Area -->
+    <main class="main-content-new">
+      <div class="content-header">
+        <h1 class="page-title">Student Dashboard</h1>
+        <p class="welcome-text">Welcome to EazyAttend. Check your attendance status and more.</p>
+      </div>
+
+      <!-- Dashboard Grid -->
+      <div class="dashboard-grid">
+        <!-- Card 1: Quick Scan -->
+        <div class="dashboard-card quick-scan-card">
+          <h4>Quick Scan</h4>
+          <p>Scan a QR code to mark your attendance</p>
+          <button class="btn btn-primary" id="open-scanner-btn">
+             <i class="fas fa-camera"></i> Open Scanner
+          </button>
+        </div>
+
+        <!-- Card 2: Attendance Rate -->
+        <div class="dashboard-card attendance-rate-card">
+          <h4>Classes Attended</h4>
+          <p>Total number of classes marked present</p>
+          <div class="total-attendance-count" id="total-attended-count">--</div>
+        </div>
+
+        <!-- Card 3: Student Information (Replaced Next Class) -->
+        <div class="dashboard-card student-info-card"> <!-- Renamed class -->
+          <h4>Student Information</h4> <!-- Changed title -->
+          <p>Your basic identification details</p> <!-- Updated description -->
+          <div class="student-info-details">
+            <div class="info-item">
+              <span class="info-label">Name:</span>
+              <span class="info-value" id="student-info-name">--</span> 
+            </div>
+            <div class="info-item">
+              <span class="info-label">Student ID:</span>
+              <span class="info-value" id="student-info-id">--</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Dashboard Grid -->
+
+      <!-- Recent Activity Section -->
+      <div class="recent-activity-section dashboard-card">
+        <h4>Recent Activity</h4>
+        <p>Your recent attendance records</p>
+        <div id="attendance-records"> 
+          <!-- Example item structure (will be populated by JS) -->
+          <!-- 
+          <div class="activity-item">
+            <div class="activity-info">
+              <span class="activity-subject">Machine Learning</span>
+              <span class="activity-time">Today, 10:30 AM</span>
+            </div>
+            <span class="activity-status present">Present</span> 
+          </div> 
+          -->
+        </div>
+      </div>
+      <!-- End Recent Activity -->
+      
+      <!-- Hidden Sections (for Scanner and Profile) -->
+      
+      <!-- QR Scanner Overlay Wrapper -->
+      <div id="qr-overlay" class="overlay-section"> 
+        <section id="qr-scanner-section" class="dashboard-section"> <!-- Re-added .dashboard-section for styling, removed .overlay-section -->
+           <!-- Keep existing scanner content but maybe wrap/style differently -->
+           <button class="close-section-btn" data-target="qr-overlay">&times;</button> <!-- Target the overlay div -->
+           <h3><i class="fas fa-qrcode"></i> Scan QR Code for Attendance</h3>
+          <div class="video-container">
+             <div class="video-placeholder"><i class="fas fa-camera"></i></div>
+            <video id="video" autoplay playsinline></video>
+            <canvas id="canvas" style="display: none;"></canvas>
+            <div id="scannerBox"></div>
+             <div class="scan-line"></div>
+          </div>
+           <div id="scanStatus">Present your code to check-in</div>
+          <div id="scan-result"></div>
+          <div class="scan-controls">
+             <button id="startScanBtn" class="btn btn-primary">
+               <span class="btn-icon"><i class="fas fa-video"></i></span>
+              Start Scanner
+            </button>
+          </div>
+        </section>
+      </div>
+      <!-- End QR Scanner Overlay Wrapper -->
+
+       <!-- Profile Overlay Wrapper -->
+      <div id="profile-overlay" class="overlay-section">
+        <section id="profile-section" class="profile-container"> <!-- Removed .dashboard-section -->
+          <button class="close-section-btn" data-target="profile-overlay">&times;</button> 
+          <!-- Removed profile-header and profile-picture divs -->
+          <h3 class="profile-title"><i class="fas fa-user-edit"></i> Your Profile</h3> <!-- Added icon and class -->
+        <form id="profile-form">
+             <!-- Keep existing form content -->
+          <div id="profile-message" style="margin-bottom: var(--spacing-md);"></div>
+          <div class="form-group">
+            <label for="profile-student-id">Student ID</label>
+            <input type="text" id="profile-student-id" class="input-field" readonly disabled>
+            <small>Student ID cannot be changed.</small>
+          </div>
+          <div class="form-group">
+            <label for="profile-first-name">First Name</label>
+            <input type="text" id="profile-first-name" name="firstName" class="input-field" required>
+          </div>
+          <div class="form-group">
+            <label for="profile-last-name">Last Name</label>
+            <input type="text" id="profile-last-name" name="lastName" class="input-field" required>
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="save-profile-btn" class="btn btn-primary">
+                <span class="btn-icon"><i class="fas fa-save"></i></span>
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </section>
+      </div>
+      <!-- End Profile Overlay Wrapper -->
+
+    </main>
+    <!-- End Main Content Area -->
+
+    <!-- Status Modal (Keep As Is) -->
+    <div id="status-modal-overlay" class="modal-overlay">
+      <div id="status-modal-content" class="modal-content">
+        <button class="close-modal-btn" id="close-status-modal-btn" aria-label="Close">&times;</button>
+        <div id="status-modal-icon-container"></div>
+        <p id="status-modal-message"></p>
+      </div>
+    </div>
+
+  </div> <!-- End .dashboard-new -->
+
+  <script src="../js/config.js"></script>
+  <script src="../js/student-dashboard.js"></script>
+  <script src="../js/scanner.js"></script>
+</body>
+
+</html>

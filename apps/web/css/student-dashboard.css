@@ -1,0 +1,1106 @@
+/* Ensure Orbitron font is available */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+/* Dashboard Layout */
+:root {
+  /* Color scheme (NEW THEME based on #fafafa, #e4e5f1, #d2d3db, #9394a5, #484b6a) */
+  --color-primary: #484b6a;           /* Dark grayish blue */
+  --color-primary-dark: #3a3d57;        /* Darker shade for hover */
+  --color-primary-light: #9394a5;       /* Medium gray as light accent */
+  --color-secondary: #e4e5f1;          /* Light grayish blue/lavender */
+  --color-secondary-dark: #d2d3db;     /* Light gray */
+  --color-text: #1f2937;               /* Main Text Color */
+  --color-text-light: #6b7280;      
+  --color-success: #10B981;           
+  --color-danger: #ef4444;              
+  --color-warning: #f59e0b;              
+  --color-white: #ffffff;               
+  --color-background: #f3f4f6;        
+  --color-border: #e5e7eb;            
+  --color-card-bg: #ffffff;
+  
+  /* Typography */
+  --font-family-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem;  /* 8px */
+  --spacing-md: 1rem;    /* 16px */
+  --spacing-lg: 1.5rem;  /* 24px */
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+  
+  /* Borders & Shadows */
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: var(--font-family-body);
+  color: var(--color-text); /* Use new main text color */
+  line-height: 1.6;
+  background-color: var(--color-background);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Base Button Styles --- */
+.btn {
+  display: inline-flex; /* Allows aligning icon and text */
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent; /* Base border */
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn .btn-icon {
+  /* Use font-size or specific width/height if needed */
+  display: inline-block; /* Ensures proper spacing */
+}
+
+/* New Dashboard Layout */
+.dashboard-new {
+  display: flex;
+  flex-direction: column; /* Stack header and content */
+  min-height: 100vh;
+}
+
+/* --- Top Navigation Header --- */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  position: sticky; /* Keep header visible */
+  top: 0;
+  z-index: 1000; /* Ensure above content */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.school-info-link {
+  display: flex; /* Use flex for logo + text alignment */
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar-logo-svg {
+  height: 32px; /* Slightly smaller logo */
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.app-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.sidebar-app-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.app-subtitle {
+  font-size: 0.7rem;
+  color: var(--color-text-light);
+}
+
+.header-nav {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.header-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  text-decoration: none;
+  color: var(--color-text-light);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.header-nav-link:hover, 
+.header-nav-link.active {
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.header-icon-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-size: 1.2rem;
+  padding: var(--spacing-xs);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.header-icon-btn:hover {
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background-color: var(--color-secondary);
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.user-menu-trigger:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.user-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-primary-light);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.user-name-display {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.user-menu-trigger i {
+  font-size: 0.7rem;
+  color: var(--color-text-light);
+}
+
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-sm) 0;
+  min-width: 180px;
+  z-index: 1010;
+  display: none; /* Hidden by default */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.user-menu-dropdown.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  }
+  
+.dropdown-item {
+    display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item i {
+  width: 16px;
+    text-align: center;
+  color: var(--color-text-light);
+}
+
+.dropdown-item:hover {
+  background-color: var(--color-secondary);
+}
+
+/* --- Main Content Area --- */
+.main-content-new {
+  padding: var(--spacing-lg);
+  flex-grow: 1; /* Allow content to take remaining space */
+}
+
+  .content-header {
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--spacing-md);
+  margin-left: 0; /* Reset margin */
+  }
+  
+  .page-title {
+  font-family: var(--font-family-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.welcome-text {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* --- Dashboard Grid --- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.dashboard-card {
+  background-color: var(--color-card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  /* Add transition for hover effect */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Add hover effect */
+.dashboard-card:hover {
+  transform: translateY(-2px); /* Slight lift */
+  box-shadow: var(--shadow-md); /* Slightly stronger shadow */
+}
+
+.dashboard-card h4 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.dashboard-card p {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  }
+  
+/* Specific Card Styles */
+.quick-scan-card .btn {
+    width: 100%;
+  box-shadow: var(--shadow-sm); 
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* Add hover effect similar to profile save button */
+.quick-scan-card .btn:hover:not(:disabled) {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  }
+  
+.quick-scan-card .btn:active:not(:disabled) {
+    transform: translateY(0px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Old/commented styles for reference or removal */
+/*
+.attendance-rate-card .attendance-percentage { ... }
+.attendance-rate-card .attendance-remark { ... }
+*/
+
+/* Renamed from .next-class-card */
+.student-info-card .student-info-details {
+    display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm); /* Space between info items */
+  margin-top: var(--spacing-sm); /* Space below paragraph */
+  text-align: left; /* Align text left */
+  }
+  
+.student-info-card .info-item {
+    display: flex; /* Align label and value side-by-side */
+    align-items: baseline; /* Align baselines */
+    gap: var(--spacing-sm);
+}
+
+.student-info-card .info-label {
+  font-weight: 600; /* Make label slightly bold */
+  color: var(--color-text-light);
+  flex-shrink: 0; /* Prevent label from shrinking */
+}
+
+.student-info-card .info-value {
+  font-weight: 500;
+  color: var(--color-text);
+  /* Allow value to wrap if needed */
+}
+
+/* Comment out or remove old next-class styles */
+/*
+.next-class-card .next-class-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  }
+  
+.next-class-card .class-name {
+  font-weight: 600;
+  }
+.next-class-card .class-room,
+.next-class-card .class-time {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+*/
+
+/* --- Recent Activity --- */
+.recent-activity-section {
+  /* Inherits .dashboard-card styles */
+}
+
+#attendance-records {
+  max-height: 400px; /* Limit height and allow scroll */
+  overflow-y: auto;
+  margin-top: var(--spacing-md);
+  /* Scrollbar styling - subtle default for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent; /* Subtle thumb, transparent track */
+  transition: scrollbar-color 0.2s ease-out; /* Smooth transition for Firefox */
+}
+
+/* Make Firefox scrollbar more visible on hover */
+#attendance-records:hover {
+    scrollbar-color: var(--color-primary-light) var(--color-secondary); /* Darker thumb, light track */
+}
+
+/* WebKit Scrollbar Styles - Initially Hidden */
+#attendance-records::-webkit-scrollbar {
+  width: 8px;
+}
+
+#attendance-records::-webkit-scrollbar-track {
+  background: transparent; /* Hide track by default */
+}
+
+#attendance-records::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Hide thumb by default */
+  border-radius: 4px;
+  border: none; /* Remove border */
+  transition: background-color 0.2s ease-out; /* Smooth transition */
+  }
+  
+/* Show WebKit scrollbar thumb on container hover */
+#attendance-records:hover::-webkit-scrollbar-thumb {
+  background-color: var(--color-secondary-dark); /* Show thumb */
+  }
+  
+/* Optional: Darken thumb further when actively hovering it */
+#attendance-records::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary-light);
+  }
+  
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm); /* Adjusted padding */
+  border-bottom: 1px solid var(--color-border);
+  /* Add transition for hover effect */
+  transition: background-color 0.2s ease;
+  border-radius: var(--border-radius-sm); 
+  }
+  
+/* Hover effect */
+.activity-item:hover {
+    background-color: var(--color-secondary); /* Use light secondary color on hover */
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+  }
+  
+.activity-info {
+  display: flex;
+  flex-direction: column;
+  }
+  
+.activity-subject {
+  font-weight: 500;
+}
+
+.activity-details {
+    display: block; /* Ensure each detail is on a new line */
+    font-size: 0.75rem; /* Make details smaller */
+    color: var(--color-text-light);
+    margin-top: var(--spacing-xs); /* Add small space between details */
+  }
+  
+/* Keep old time style commented or remove if not needed elsewhere */
+/* 
+.activity-time {
+    font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+*/
+
+.activity-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  text-transform: uppercase;
+  }
+  
+.activity-status.present {
+  background-color: #d1fae5; /* Light green */
+  color: #065f46; /* Dark green */
+}
+
+/* --- Styles for Overlay Sections (Scanner, Profile) --- */
+.overlay-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  backdrop-filter: blur(4px);
+  z-index: 1100; /* Above header */
+  display: none; /* Hidden by default */
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.overlay-section.visible {
+  display: flex !important; /* Use flex to center content */
+}
+
+/* Style the content SECTIONS inside the overlay */
+/* #qr-scanner-section, REMOVED - Apply specific profile styles below */
+#profile-section {
+  background-color: var(--color-card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 2rem; /* Match teacher padding */
+  margin: 0; 
+  z-index: 1110; 
+  max-width: 500px; /* Match teacher max-width */
+  width: 90%; /* Add responsive width */
+  max-height: 90%;
+  overflow-y: auto;
+  position: relative; 
+  border: none; /* Remove potential border from .dashboard-card */
+  animation: scaleIn 0.3s ease; /* Add pop-in animation */
+}
+
+/* Remove specific QR scanner styles from combined rule */
+#qr-scanner-section {
+  background-color: var(--color-card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-xl); 
+  margin: 0; 
+  z-index: 1110; 
+  max-width: 500px; 
+  max-height: 90%;
+  overflow-y: auto;
+  position: relative;
+  text-align: center; /* Keep text centered by default */
+  }
+  
+/* Scanner Section Title */
+#qr-scanner-section h3 {
+    font-size: 1.3rem; /* Slightly smaller than profile title */
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    margin-top: 0;
+    margin-bottom: var(--spacing-md); /* Reduced bottom margin */
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    width: 100%; /* Ensure it spans width for potential justify */
+    justify-content: center; /* Center title content */
+}
+
+#qr-scanner-section h3 i {
+    color: var(--color-primary);
+}
+
+/* Video Area Styling */
+.video-container {
+    width: 100%;
+    max-width: 350px; /* Limit video width */
+    aspect-ratio: 1 / 1; /* Make it square */
+    position: relative;
+    background-color: #eee; /* Placeholder background */
+    border-radius: var(--border-radius-md);
+    overflow: hidden; /* Clip video/scanline */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--color-border);
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex; /* Use flex to center icon */
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secondary);
+  }
+  
+.video-placeholder i {
+    font-size: 3rem;
+    color: var(--color-primary-light);
+}
+
+#video {
+    display: block; /* Remove extra space */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the container */
+    position: relative;
+}
+
+/* Scanner Box (Optional - Usually positioned by JS) */
+#scannerBox {
+    position: absolute;
+    border: 2px solid red; /* Example styling */
+    /* Positioned by JS */
+    z-index: 2;
+}
+
+/* Scan Line (Example animation) */
+.scan-line {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-danger), transparent);
+    box-shadow: 0 0 5px var(--color-danger);
+    top: 50%; /* Start in middle */
+    opacity: 0; /* Hidden initially */
+    transition: opacity 0.3s ease;
+    z-index: 3;
+    animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateY(-80px); }
+    50% { transform: translateY(80px); }
+    100% { transform: translateY(-80px); }
+}
+
+/* Scan Status & Controls */
+#scanStatus {
+    margin-top: var(--spacing-md); /* Space above */
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    min-height: 1.2em; /* Prevent layout shift */
+}
+
+#scan-result {
+    font-weight: bold;
+    min-height: 1.2em; /* Prevent layout shift */
+    margin-bottom: var(--spacing-md);
+}
+
+.scan-controls {
+    margin-top: var(--spacing-sm); /* Space above button */
+    width: 100%; /* Allow button to center if needed */
+  display: flex;
+  justify-content: center;
+}
+
+/* Ensure the button has correct styles */
+#qr-scanner-section #startScanBtn {
+   /* Styles applied via .btn .btn-primary */
+}
+
+/* Styling for the Profile Section Title */
+.profile-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.profile-title i {
+  color: var(--color-primary);
+}
+
+/* Ensure form layout is correct */
+#profile-form .form-group {
+  margin-bottom: var(--spacing-lg);
+  text-align: left; /* Align labels left */
+}
+
+#profile-form label {
+  display: block;
+  font-weight: 500;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.9rem;
+}
+
+#profile-form .input-field {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-white);
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+#profile-form .input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+#profile-form #profile-student-id {
+  background-color: var(--color-secondary);
+  color: var(--color-text-light);
+  cursor: not-allowed;
+}
+
+#profile-form #profile-student-id + small {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  margin-top: var(--spacing-xs);
+  display: block;
+}
+
+#profile-form .form-actions {
+  text-align: right; /* Align button right */
+  margin-top: var(--spacing-xl);
+  padding-top: 0;
+  border-top: none;
+}
+
+#profile-form button#save-profile-btn {
+  /* Use existing button styles (.btn, .btn-primary) */
+  width: auto;
+  min-width: 120px;
+  box-shadow: var(--shadow-sm); /* Add subtle shadow */
+}
+
+#profile-form button#save-profile-btn:hover:not(:disabled) {
+  box-shadow: var(--shadow-md); /* Increase shadow on hover */
+  transform: translateY(-1px); /* Subtle lift effect */
+}
+
+#profile-form button#save-profile-btn:active:not(:disabled) {
+  transform: translateY(0px); /* Press down effect */
+  box-shadow: var(--shadow-sm);
+}
+
+/* Remove old profile styles */
+/* .profile-container { ... } */
+/* .profile-header { ... } */
+/* .profile-picture { ... } */
+/* #profile-section h3 { ... } */
+
+/* Keep message styles */
+#profile-message {
+  text-align: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  min-height: 1.5em;
+  margin-bottom: var(--spacing-lg);
+  /* display: none; - Handled by JS */
+}
+
+#profile-message.visible {
+  display: block;
+}
+
+#profile-message.success-message {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+#profile-message.error-message {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+#profile-message.info-message {
+  background-color: #f3f4f6;
+  color: var(--color-text-light);
+}
+
+/* Close button for overlay sections (relative to its section) */
+.close-section-btn {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-text-light);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  line-height: 1;
+}
+
+.close-section-btn:hover {
+  color: var(--color-text);
+}
+
+/* --- Old/Unused Styles to Remove/Ignore --- */
+
+/* Sidebar Layout */
+/* .sidebar { display: none; } */
+/* .main-content { margin-left: 0; } */
+
+/* Sidebar Info */
+/* .school-info { display: none; } */
+
+/* Sidebar Profile */
+/* .sidebar-user-card { display: none; } */
+/* .sidebar-profile { display: none; } */
+/* .profile-icon { display: none; } */
+/* .profile-name { display: none; } */
+/* .profile-edit-link { display: none; } */
+
+/* Sidebar Nav */
+/* .nav-heading { display: none; } */
+/* .nav-menu { display: none; } */
+/* .nav-item { display: none; } */
+/* .nav-link { display: none; } */
+/* .logout-item { display: none; } */
+/* .logout-link-container { display: none; } */
+
+/* Original Scanner/Attendance/Profile Sections */
+/* These IDs are reused but styles might need adjustments if not overlay */
+/* #student-section { display: none; } */
+/* #attendance-section { display: none; } */
+
+/* Mobile Menu */
+/* .mobile-menu-overlay { display: none; } */
+/* .mobile-menu-btn { display: none; } */
+
+/* Remove specific styling for QR Scanner section that might conflict */
+/* #qr-scanner-section:hover { ... } */
+/* #qr-scanner-section:active { ... } */
+/* .video-placeholder { ... } */
+/* .scan-line { ... } */
+
+/* Responsive adjustments for old sidebar */
+/* @media (max-width: 768px) { ... } */
+/* @media (max-width: 480px) { ... } */
+/* @media (max-height: 500px) { ... } */
+
+/* Ensure Status Modal is still usable */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050; /* Keep z-index */
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Add this rule to show the modal when .visible class is present */
+.modal-overlay.visible {
+  display: flex; /* Or block, depending on desired layout */
+  opacity: 1;
+}
+
+/* Style for the close button inside the status modal */
+#status-modal-content .close-modal-btn {
+  position: absolute;
+  top: 8px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-text-light);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  display: none; /* Hidden by default, show only during loading */
+}
+#status-modal-content .close-modal-btn:hover {
+  color: var(--color-text);
+}
+
+/* Add spinner style if not already present or refine */
+.spinner {
+  width: 24px; /* Example size */
+  height: 24px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--color-primary); /* Use theme color */
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto; /* Center if needed */
+}
+
+/* Smaller spinner variant for buttons */
+.spinner-small {
+  width: 1em; /* Adjust size relative to button font size */
+  height: 1em;
+  border-width: 2px; /* Make border thinner */
+  /* Spinner animation is inherited */
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .header-nav {
+    display: none; /* Hide nav links in header */
+  }
+  .header-right {
+     /* Adjust spacing if needed */
+  }
+  .main-content-new {
+    padding: var(--spacing-md);
+  }
+  .dashboard-grid {
+     grid-template-columns: 1fr; /* Stack cards */
+     gap: var(--spacing-md); /* Reduce gap between cards */
+  }
+  .dashboard-card {
+      padding: var(--spacing-md); /* Reduce card padding */
+  }
+  .total-attendance-count {
+      font-size: 2.2rem; /* Slightly smaller count */
+  }
+  .page-title {
+    font-size: 1.5rem;
+  }
+  /* Make overlays wider */
+  #qr-scanner-section,
+  #profile-section {
+    max-width: 90%;
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .main-header {
+    padding: var(--spacing-xs) var(--spacing-sm); /* Further reduce header padding */
+  }
+  .sidebar-logo-svg {
+    height: 28px;
+    width: 28px;
+  }
+  .sidebar-app-name {
+      font-size: 1rem;
+  }
+  .app-subtitle {
+      font-size: 0.65rem;
+  }
+  .user-avatar {
+      width: 20px;
+      height: 20px;
+      font-size: 0.7rem;
+  }
+  .user-name-display {
+      font-size: 0.8rem;
+  }
+  .user-menu-trigger {
+      padding: var(--spacing-xs);
+      gap: var(--spacing-xs);
+  }
+  .main-content-new {
+    padding: var(--spacing-sm); /* Further reduce content padding */
+  }
+  .page-title {
+    font-size: 1.3rem;
+  }
+  .dashboard-card h4 {
+      font-size: 1rem;
+  }
+  .dashboard-card p {
+      font-size: 0.8rem;
+  }
+  .total-attendance-count {
+      font-size: 2rem;
+  }
+  .activity-item {
+      /* Optionally adjust flex direction or alignment for smaller screens */
+      /* Example: flex-direction: column; align-items: flex-start; */
+  }
+  .activity-subject {
+      font-size: 0.9rem;
+  }
+  .activity-details {
+      font-size: 0.7rem;
+}
+  .activity-status {
+      font-size: 0.7rem;
+      padding: 2px 4px;
+  }
+   /* Make overlays almost full width */
+  #qr-scanner-section,
+  #profile-section {
+    max-width: 95%;
+    padding: var(--spacing-md);
+  }
+  #qr-scanner-section h3,
+  .profile-title {
+      font-size: 1.1rem;
+  }
+  #profile-form label {
+      font-size: 0.85rem;
+}
+  #profile-form .input-field {
+      font-size: 0.9rem;
+      padding: var(--spacing-xs) var(--spacing-sm);
+}
+  .video-placeholder i {
+      font-size: 2.5rem;
+  }
+  #scanStatus {
+  font-size: 0.8rem;
+  }
+  .btn {
+      font-size: 0.9rem;
+      padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  #profile-form button#save-profile-btn,
+  #qr-scanner-section #startScanBtn {
+      min-width: 100px;
+  }
+}
+
+/* Updated styles for the new total attended count display */
+.total-attendance-count {
+  font-size: 2.8rem; /* Make the count large */
+  font-weight: 700; /* Make it bold */
+  color: var(--color-primary); /* Use primary color */
+  margin-top: var(--spacing-sm); /* Add some space above */
+  margin-bottom: var(--spacing-sm); /* Add some space below */
+  line-height: 1.2; /* Adjust line height for large font */
+  text-align: center; /* Ensure it's centered if card alignment changes */
+}
+
+/* Style the modal content area */
+#status-modal-content {
+  background-color: #e4e5f1; /* Requested background color */
+  padding: var(--spacing-lg) var(--spacing-xl); /* Add some padding */
+  border-radius: var(--border-radius-lg); /* Rounded corners */
+  box-shadow: var(--shadow-lg); /* Add a shadow */
+  text-align: center; /* Center text */
+  position: relative; /* Needed for absolute positioning of close button */
+  max-width: 90%; /* Prevent it getting too wide on large screens */
+  width: 400px; /* Give it a specific width */
+}
+
+/* Styles for Status Modal Icons */
+#status-modal-icon-container .status-icon {
+  font-size: 2.5rem; /* Make icon larger */
+  display: block; /* Ensure it takes space */
+  margin-bottom: var(--spacing-sm); /* Add space below icon */
+}
+
+#status-modal-icon-container .status-icon.success {
+  color: var(--color-success); /* Use theme success color */
+}
+
+#status-modal-icon-container .status-icon.error {
+  color: var(--color-danger); /* Use theme danger color */
+}
+
+#status-modal-icon-container .status-icon.warning {
+  color: var(--color-warning); /* Use theme warning color */
+}

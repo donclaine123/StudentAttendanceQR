@@ -1,0 +1,66 @@
+/* Features Section Styles */
+.features {
+  position: relative;
+  background-color: var(--white);
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 42px;
+  color: var(--dark-blue);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.section-subtitle {
+  color: var(--dark-gray);
+  max-width: 600px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+  gap: 2rem;
+}
+
+.feature-card {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: var(--box-shadow-sm); /* Add initial shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition */
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(74, 144, 226, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 24px;
+  color: var(--dark-blue);
+}
+
+.feature-card h3 {
+  font-size: 24px;
+  color: var(--dark-blue);
+  margin-bottom: 16px;
+}
+
+.feature-card p {
+  color: var(--dark-gray);
+  line-height: 1.6;
+}
+
+/* Hover Effect */
+.feature-card:hover {
+  transform: translateY(-5px); /* Lift effect */
+  box-shadow: var(--box-shadow); /* Stronger shadow on hover */
+}

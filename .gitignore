@@ -1,0 +1,38 @@
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Build output and caches
+dist/
+build/
+coverage/
+.cache/
+.netlify/
+temp/
+tmp/
+.nyc_output/
+
+# Local backend-only helper scripts
+apps/api/hash_admin_pass.js
+.github
