@@ -24,7 +24,7 @@ class CustomMySQLStore extends Store {
     try {
       conn = await this.pool.getConnection();
       const [rows] = await conn.query('SELECT 1 + 1 AS result');
-      console.log('✓ Session Store connected to Railway MySQL. Result:', rows[0].result);
+      console.log('✓ Session Store connected to MySQL. Result:', rows[0].result);
     } catch (err) {
       console.error('✗ Session Store connection failed:', err.message);
       // Don't throw error, just log it

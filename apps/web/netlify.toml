@@ -1,6 +1,6 @@
 # Netlify configuration file
 
-# Proxy configuration to forward API requests to Railway backend
+# Proxy configuration to forward API requests to the Render backend
 [[redirects]]
   from = "/api/*"
   to = "https://qrattendance-backend.onrender.com/:splat"

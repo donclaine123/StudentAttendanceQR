@@ -22,6 +22,39 @@ const PORT = process.env.PORT || 5000;
 // Define the API URL based on the environment
 const API_URL = process.env.API_URL || `http://localhost:${PORT}`;
 
+const normalizeOrigin = (value) => {
+  if (!value) {
+    return null;
+  }
+
+  try {
+    return new URL(value).origin;
+  } catch (error) {
+    return null;
+  }
+};
+
+const allowedOrigins = new Set([
+  "http://localhost:5500",
+  "http://localhost:3000",
+  "http://127.0.0.1:5500",
+  "https://eazyattend.netlify.app",
+  "https://qrcode-attendance.netlify.app"
+]);
+
+const configuredFrontendOrigin = normalizeOrigin(process.env.FRONTEND_URL);
+if (configuredFrontendOrigin) {
+  allowedOrigins.add(configuredFrontendOrigin);
+}
+
+const isAllowedCorsOrigin = (origin) => {
+  return !!origin && (
+    allowedOrigins.has(origin) ||
+    origin.includes('netlify.app') ||
+    origin.includes('onrender.com')
+  );
+};
+
 // Initialize store with error handling
 let sessionStore;
 try {
@@ -46,16 +79,8 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: function(origin, callback) {
-      const allowedOrigins = [
-        "http://localhost:5500", 
-        "http://localhost:3000", 
-        "http://127.0.0.1:5500", 
-        "https://eazyattend.netlify.app",
-        "https://qrcode-attendance.netlify.app" // Generic netlify domain
-      ];
-      
       // Allow requests with no origin (like mobile apps, curl, etc)
-      if (!origin || allowedOrigins.indexOf(origin) !== -1 || origin.includes('netlify.app')) {
+      if (!origin || isAllowedCorsOrigin(origin)) {
         callback(null, origin);
       } else {
         callback(null, false);
@@ -72,7 +97,7 @@ app.use(
 // Add CORS headers directly for more compatibility
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (origin && (origin.includes('localhost') || origin.includes('127.0.0.1') || origin.includes('netlify.app'))) {
+  if (origin && isAllowedCorsOrigin(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma, Expires, X-User-ID, X-User-Role');
@@ -291,7 +316,7 @@ Object.defineProperty(app.response, 'cookie', {
       cookieOptions.secure = true;
       cookieOptions.sameSite = 'none';
       // Set domain to allow cross-site cookies if in production
-      // This helps with Netlify to Railway communication
+      // This helps with deployed frontend/backend communication
       if (req.headers.origin && req.headers.origin.includes('netlify.app')) {
         // Don't set domain for cross-origin cookies, just ensure SameSite is none
         console.log(`Setting cross-origin cookie for origin: ${req.headers.origin}`);
@@ -572,6 +597,7 @@ app.use(cors({
   origin: function(origin, callback) {
     const allowedOrigins = [
       process.env.FRONTEND_URL,
+      'https://eazyattend.netlify.app',
       'http://localhost:5500',
       'http://127.0.0.1:5500',
       'http://localhost:3000',
