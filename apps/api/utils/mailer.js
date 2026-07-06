@@ -60,7 +60,7 @@ async function sendViaResend(options) {
 
 // Helper function to send email via Brevo HTTP API (Port 443 - HTTPS)
 async function sendViaBrevo(options) {
-  const senderEmail = emailUser || "genshin111303@gmail.com";
+  const senderEmail = process.env.BREVO_SENDER_EMAIL || emailUser || "genshin111303@gmail.com";
   const to = Array.isArray(options.to) ? options.to.map(email => ({ email })) : [{ email: options.to }];
 
   const response = await fetch("https://api.brevo.com/v3/smtp/email", {
