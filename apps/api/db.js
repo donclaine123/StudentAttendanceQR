@@ -5,10 +5,28 @@ const path = require('path');
 
 // Note: Do not log DB_PASS in production for security reasons
 
-const caPath = path.join(__dirname, 'certs', 'ca.pem');
-const sslConfig = fs.existsSync(caPath)
-  ? { ca: fs.readFileSync(caPath) }
-  : undefined;
+// SSL Configuration for cloud hosted databases (Render, Aiven, Railway, AWS RDS, etc.)
+let sslConfig = undefined;
+
+if (process.env.DB_SSL !== "false") {
+  const caPath = path.join(__dirname, 'certs', 'ca.pem');
+  const caExists = fs.existsSync(caPath);
+  
+  // rejectUnauthorized defaults to false so cloud SSL connections don't fail on issuer mismatch
+  const rejectUnauthorized = process.env.DB_SSL_REJECT_UNAUTHORIZED === "true";
+
+  sslConfig = {
+    rejectUnauthorized: rejectUnauthorized
+  };
+
+  if (caExists && process.env.USE_CUSTOM_CA === "true") {
+    try {
+      sslConfig.ca = fs.readFileSync(caPath);
+    } catch (err) {
+      console.warn("Could not read ca.pem certificate file:", err.message);
+    }
+  }
+}
 
 // Create a connection pool with better error handling
 const pool = mysql.createPool({
