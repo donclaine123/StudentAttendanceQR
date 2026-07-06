@@ -70,10 +70,15 @@ try {
   process.exit(1);
 }
 
+const path = require('path');
+
 // Body parsing - must be before session middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Serve static frontend files from apps/web
+app.use(express.static(path.join(__dirname, '../web')));
 
 // Configure CORS with very permissive settings for development
 app.use(
@@ -634,8 +639,8 @@ app.get('/attend', (req, res) => {
   res.redirect(redirectUrl);
 });
 
-// Root route for quick browser checks
-app.get('/', (req, res) => {
+// API status check route
+app.get('/api-status', (req, res) => {
   res.json({
     status: 'running',
     message: 'QR Attendance API is running',

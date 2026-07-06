@@ -1,0 +1,12 @@
+{
+  "name": "qr-student-attendance-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo root for QR Code Student Attendance System",
+  "scripts": {
+    "start": "cd apps/api && node server.js",
+    "dev": "cd apps/api && node server.js",
+    "init-db": "cd apps/api && node scripts/init-schema.js",
+    "test-email": "cd apps/api && node scripts/test-email.js"
+  }
+}
