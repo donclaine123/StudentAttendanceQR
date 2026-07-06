@@ -388,46 +388,92 @@ router.post("/register", async (req, res) => {
     // Optional: Add email format validation, password strength check here if desired
     // --- End Input Validation ---
 
-    // 🔹 Check if email already exists
-    const [teacherRows] = await db.query("SELECT id FROM teachers WHERE email = ?", [email]);
-    if (teacherRows.length > 0) {
-      return res.status(400).json({ success: false, message: "Email already registered as a teacher." });
-    }
-
-    const [studentRows] = await db.query("SELECT id FROM students WHERE email = ?", [email]);
-    if (studentRows.length > 0) {
-      return res.status(400).json({ success: false, message: "Email already registered as a student." });
-    }
-
     // 🔹 Hash password and generate verification token
     const hashedPassword = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString("hex");
 
     let userId;
-    if (role === "teacher") {
-      const [result] = await db.query(
-        "INSERT INTO teachers (email, password_hash, first_name, last_name, verification_token, is_verified) VALUES (?, ?, ?, ?, ?, ?)",
-        [email, hashedPassword, firstName, lastName, verificationToken, false] // Use BOOLEAN for is_verified
+    let isExistingUnverified = false;
+
+    // 🔹 Check if email already exists
+    const [teacherRows] = await db.query("SELECT id, is_verified FROM teachers WHERE email = ?", [email]);
+    if (teacherRows.length > 0) {
+      if (teacherRows[0].is_verified) {
+        return res.status(400).json({ success: false, message: "Email already registered as a teacher." });
+      }
+      if (role !== "teacher") {
+        return res.status(400).json({ success: false, message: "Email already registered as a teacher." });
+      }
+      userId = teacherRows[0].id;
+      isExistingUnverified = true;
+      await db.query(
+        "UPDATE teachers SET password_hash = ?, first_name = ?, last_name = ?, verification_token = ? WHERE id = ?",
+        [hashedPassword, firstName, lastName, verificationToken, userId]
       );
-      userId = result.insertId;
-    } else if (role === "student") {
-      const [result] = await db.query(
-        "INSERT INTO students (email, password_hash, first_name, last_name, student_id, verification_token, is_verified) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        [email, hashedPassword, firstName, lastName, studentId, verificationToken, false]
+    }
+
+    const [studentRows] = await db.query("SELECT id, is_verified FROM students WHERE email = ?", [email]);
+    if (studentRows.length > 0) {
+      if (studentRows[0].is_verified) {
+        return res.status(400).json({ success: false, message: "Email already registered as a student." });
+      }
+      if (role !== "student") {
+        return res.status(400).json({ success: false, message: "Email already registered as a student." });
+      }
+      userId = studentRows[0].id;
+      isExistingUnverified = true;
+      await db.query(
+        "UPDATE students SET password_hash = ?, first_name = ?, last_name = ?, student_id = ?, verification_token = ? WHERE id = ?",
+        [hashedPassword, firstName, lastName, studentId, verificationToken, userId]
       );
-      userId = result.insertId;
-    } else {
-      return res.status(400).json({ success: false, message: "Invalid role" });
+    }
+
+    if (!isExistingUnverified) {
+      if (role === "teacher") {
+        const [result] = await db.query(
+          "INSERT INTO teachers (email, password_hash, first_name, last_name, verification_token, is_verified) VALUES (?, ?, ?, ?, ?, ?)",
+          [email, hashedPassword, firstName, lastName, verificationToken, false]
+        );
+        userId = result.insertId;
+      } else if (role === "student") {
+        const [result] = await db.query(
+          "INSERT INTO students (email, password_hash, first_name, last_name, student_id, verification_token, is_verified) VALUES (?, ?, ?, ?, ?, ?, ?)",
+          [email, hashedPassword, firstName, lastName, studentId, verificationToken, false]
+        );
+        userId = result.insertId;
+      } else {
+        return res.status(400).json({ success: false, message: "Invalid role" });
+      }
     }
 
     // 🔹 Send verification email
     const verifyUrl = `${getFrontendBaseUrl()}/pages/verify.html?token=${verificationToken}`;
-    await transporter.sendMail({
-      from: `"QR Code Attendance System" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "Verify Your Email - QR Code Attendance System",
-      html: getVerificationEmailTemplate(verifyUrl, firstName),
-    });
+    try {
+      await transporter.sendMail({
+        from: `"QR Code Attendance System" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: "Verify Your Email - QR Code Attendance System",
+        html: getVerificationEmailTemplate(verifyUrl, firstName),
+      });
+    } catch (mailErr) {
+      console.error("❌ Verification email failed to send:", mailErr.message);
+      
+      // Rollback inserted user record so email is not locked in DB
+      try {
+        if (role === "teacher") {
+          await db.query("DELETE FROM teachers WHERE id = ?", [userId]);
+        } else if (role === "student") {
+          await db.query("DELETE FROM students WHERE id = ?", [userId]);
+        }
+      } catch (cleanupErr) {
+        console.error("Error cleaning up unverified user:", cleanupErr.message);
+      }
+
+      return res.status(500).json({
+        success: false,
+        message: `Failed to send verification email: ${mailErr.message}. Please check EMAIL_USER and EMAIL_PASS on Render.`
+      });
+    }
 
     // Send back requiresVerification flag and user email
     res.json({ 

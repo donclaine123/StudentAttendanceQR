@@ -8,18 +8,26 @@ const smtpSecure = String(process.env.SMTP_SECURE || '').toLowerCase() === 'true
 const shouldVerifyOnStartup = process.env.EMAIL_VERIFY_ON_STARTUP === 'true';
 
 // Configure Nodemailer transporter using environment variables.
-// Prefer explicit SMTP settings when provided, otherwise fall back to Gmail.
+// Prefer explicit SMTP settings when provided, otherwise fall back to Gmail SSL (port 465).
 const transportOptions = smtpHost
   ? {
       host: smtpHost,
       port: smtpPort,
       secure: smtpSecure,
-      auth: emailUser && emailPass ? { user: emailUser, pass: emailPass } : undefined
+      auth: emailUser && emailPass ? { user: emailUser, pass: emailPass } : undefined,
+      tls: { rejectUnauthorized: false }
     }
   : {
-      service: 'gmail',
-      auth: emailUser && emailPass ? { user: emailUser, pass: emailPass } : undefined
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: emailUser && emailPass ? { user: emailUser, pass: emailPass } : undefined,
+      tls: { rejectUnauthorized: false }
     };
+
+if (!emailUser || !emailPass) {
+  console.warn("⚠️ WARNING: EMAIL_USER or EMAIL_PASS environment variable is missing!");
+}
 
 const transporter = nodemailer.createTransport(transportOptions);
 
