@@ -3,7 +3,7 @@
 # Proxy configuration to forward API requests to the Render backend
 [[redirects]]
   from = "/api/*"
-  to = "https://studentattendanceqr.onrender.com/:splat"
+  to = "https://studentattendanceqr-3zsh.onrender.com/:splat"
   status = 200
   force = true
   
