@@ -4,71 +4,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EazyAttend - Login</title>
+  <title>EazyAttend - Login & Register</title>
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Auth Stylesheet -->
   <link rel="stylesheet" href="../css/login.css">
-  <link rel="stylesheet" href="../vendor/fontawesome/css/all.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <link rel="icon" href="data:," />
 </head>
 
 <body>
-  <div class="cyber-background">
-    <div class="grid-pattern"></div>
-    <div id="particles"></div>
-    <div class="gradient-overlay"></div>
-  </div>
-
+  <!-- Clean Back to Home Navigation Button -->
   <a href="../index.html" class="home-button">
-    <svg class="sidebar-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="vertical-align: middle; fill: white;">
-         <rect x="5" y="5" width="90" height="90" rx="25" ry="25" fill="#484b6a"/>
-         <rect x="25" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
-         <rect x="55" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
-         <rect x="25" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
-         <rect x="55" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+      <rect x="5" y="5" width="90" height="90" rx="25" ry="25" fill="#4f46e5"/>
+      <rect x="25" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+      <rect x="55" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+      <rect x="25" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+      <rect x="55" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
     </svg>
     <span>EazyAttend</span>
   </a>
 
   <div class="container">
+    <!-- Left Panel: Modern Brand Showcase -->
     <div class="left-panel">
       <div class="cyber-logo-background">
-        <img src="../assets/qrcode.jpg" alt="Qrcode Background" class="left-panel-bg-image">
-        <div class="logo-grid-pattern"></div>
-        <div id="floating-rectangles"></div>
-        <div class="neon-circle"></div>
         <div class="logo-content">
+          <div class="brand-badge">
+            <i class="fas fa-qrcode"></i> Smart Attendance
+          </div>
           <h1 class="logo-title">Eazy<span>Attend</span></h1>
-          <div class="logo-subtitle">Effortless Attendance</div>
-          <div class="status-card">
-            <div class="status-title">Check-in Status</div>
-            <div class="status-indicator">
-              <span class="status-dot"></span>
-              <span>Systems Online</span>
+          <div class="logo-subtitle">Effortless, real-time student attendance tracking with instant QR code scanning.</div>
+          
+          <div class="showcase-features">
+            <div class="showcase-item">
+              <div class="showcase-item-icon"><i class="fas fa-bolt"></i></div>
+              <span>Instant QR Check-In</span>
+            </div>
+            <div class="showcase-item">
+              <div class="showcase-item-icon"><i class="fas fa-chart-pie"></i></div>
+              <span>Automated Attendance Reports</span>
+            </div>
+            <div class="showcase-item">
+              <div class="showcase-item-icon"><i class="fas fa-shield-halved"></i></div>
+              <span>Secure Session Management</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Right Panel: Auth Forms -->
     <div class="right-panel">
-      <!-- == Already Logged In Notification (Initially Hidden) == -->
-      <!-- ======================================================== -->
-
+      <!-- Login Form Section -->
       <div id="login-section" class="form-section">
         <div class="login-header">
-          <div class="app-logo">
-            <div class="logo-icon">
-              <div class="logo-glow"></div>
-              <svg class="sidebar-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="vertical-align: middle; position: relative; z-index: 1;">
-                   <rect x="5" y="5" width="90" height="90" rx="25" ry="25" fill="#484b6a"/>
-                   <rect x="25" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
-                   <rect x="55" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
-                   <rect x="25" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
-                   <rect x="55" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
-              </svg>
-            </div>
-            <span class="logo-text">EAZY<span>ATTEND</span></span>
-          </div>
           <h2>Welcome Back!</h2>
           <p>Sign in to your account to continue</p>
         </div>
@@ -78,25 +75,23 @@
 
           <div class="form-group">
             <div class="input-wrapper">
-              <i class="fa fa-envelope input-icon-fa"></i> <input type="email" id="email" name="email"
-                class="input-field" placeholder="alex.rivera@example.edu" required autocomplete="username">
+              <i class="fa fa-envelope input-icon-fa"></i>
+              <input type="email" id="email" name="email" class="input-field" placeholder="Enter your email" required autocomplete="username">
             </div>
           </div>
 
           <div class="form-group">
-
             <div class="input-wrapper">
-              <i class="fa fa-lock input-icon-fa"></i> <input type="password" id="password" name="password"
-                class="input-field" placeholder="Password" required autocomplete="current-password">
-              <button type="button" class="toggle-password">
-                <i class="fa fa-eye eye-icon"></i> </button>
+              <i class="fa fa-lock input-icon-fa"></i>
+              <input type="password" id="password" name="password" class="input-field" placeholder="Enter your password" required autocomplete="current-password">
+              <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                <i class="fa fa-eye eye-icon"></i>
+              </button>
             </div>
-            <a href="#" class="forgot-password">Forgot password?</a>
+            <a href="reset-password.html" class="forgot-password">Forgot password?</a>
           </div>
 
-
-
-          <button type="submit" id="loginBtn" class="login-button">Login</button>
+          <button type="submit" id="loginBtn" class="login-button">Sign In</button>
         </form>
 
         <div class="signup-link">
@@ -105,12 +100,8 @@
         </div>
       </div>
       
+      <!-- Verification Success Section (Hidden by default) -->
       <div id="verification-section" class="verification-section" style="display: none;">
-        <div class="auth-header">
-          <img src="../assets/logo.png" alt="Logo" class="logo-image">
-          <span class="logo-text">EAZY<span>ATTEND</span></span>
-        </div>
-
         <div class="verification-icon"><i class="fa fa-check-circle"></i></div>
         <h2 class="verification-title">Registration Successful!</h2>
         <p class="verification-instructions">
@@ -121,59 +112,55 @@
           You need to verify your email before you can log in.
         </p>
 
-        <!-- Optional: Add a button to go back to login -->
         <div class="auth-footer">
           <button id="proceed-to-login-btn" class="btn verification-btn">Proceed to Login</button>
         </div>
       </div>
 
-
+      <!-- Signup Panel Section (Hidden by default) -->
       <div class="signup-panel">
         <div class="signup-header">
           <h2>Create Account</h2>
           <p>Sign up for your EazyAttend account</p>
         </div>
+        
         <form id="signup-form" class="signup-form">
           <div class="form-group">
-            <label for="role" class="role-label">Select role</label>
+            <label for="role" class="role-label">Select Role</label>
             <select id="role" name="role" class="role-toggle-hidden" required>
-              <option value="" disabled selected>Select role</option>
-              <option value="student">Student</option>
+              <option value="" disabled>Select role</option>
+              <option value="student" selected>Student</option>
               <option value="teacher">Teacher</option>
             </select>
             <div class="role-toggle-container">
-              <div class="role-toggle-option active" data-value="student"><i class="fa fa-user-graduate"></i> Student
+              <div class="role-toggle-option active" data-value="student">
+                <i class="fa fa-user-graduate"></i> Student
               </div>
-              <div class="role-toggle-option" data-value="teacher"><i class="fa fa-chalkboard-teacher"></i> Teacher
+              <div class="role-toggle-option" data-value="teacher">
+                <i class="fa fa-chalkboard-teacher"></i> Teacher
               </div>
             </div>
           </div>
 
           <div class="form-group">
-
             <div class="input-wrapper">
               <i class="fa fa-envelope input-icon-fa"></i>
-              <input type="email" id="reg-email" name="email" class="input-field" placeholder="Enter your email"
-                required autocomplete="email">
+              <input type="email" id="reg-email" name="email" class="input-field" placeholder="Enter your email" required autocomplete="email">
             </div>
             <span class="input-error-message" id="email-error-message"></span>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-
               <div class="input-wrapper">
                 <i class="fa fa-user input-icon-fa"></i>
-                <input type="text" id="first-name" name="first-name" class="input-field"
-                  placeholder="Enter your first name" required autocomplete="given-name">
+                <input type="text" id="first-name" name="first-name" class="input-field" placeholder="First name" required autocomplete="given-name">
               </div>
             </div>
             <div class="form-group">
-
               <div class="input-wrapper">
                 <i class="fa fa-user input-icon-fa"></i>
-                <input type="text" id="last-name" name="last-name" class="input-field"
-                  placeholder="Enter your last name" required autocomplete="family-name">
+                <input type="text" id="last-name" name="last-name" class="input-field" placeholder="Last name" required autocomplete="family-name">
               </div>
             </div>
           </div>
@@ -181,43 +168,39 @@
           <div class="form-group">
             <div class="input-wrapper password-input-wrapper">
               <i class="fa fa-lock input-icon-fa"></i>
-              <input type="password" id="reg-password" name="password" class="input-field"
-                placeholder="Create a password" required autocomplete="new-password">
-              <button type="button" class="toggle-password">
+              <input type="password" id="reg-password" name="password" class="input-field" placeholder="Create a password" required autocomplete="new-password">
+              <button type="button" class="toggle-password" aria-label="Toggle password visibility">
                 <i class="fa fa-eye eye-icon"></i>
               </button>
             </div>
-            <!-- Add Password Strength Meter HTML -->
+            <!-- Password Strength Meter -->
             <div class="strength-meter-container">
               <div id="strength-meter-fill"></div>
-              <span id="strength-text"></span>
             </div>
-            <!-- Add dedicated password length error message -->
-            <div id="password-length-error" class="error-message" style="display: none;">Password must be at least 8 characters long.</div>
-            <!-- End Password Strength Meter HTML -->
+            <span id="strength-text"></span>
+            <div id="password-length-error" class="error-message" style="display: none; margin-top: 6px;">Password must be at least 8 characters long.</div>
           </div>
 
           <div class="form-group">
             <div class="input-wrapper password-input-wrapper">
               <i class="fa fa-lock input-icon-fa"></i>
               <input type="password" id="confirm-password" class="input-field" placeholder="Confirm password" required autocomplete="new-password">
-              <button type="button" class="toggle-password">
+              <button type="button" class="toggle-password" aria-label="Toggle password visibility">
                 <i class="fa fa-eye eye-icon"></i>
               </button>
             </div>
-            <div id="password-match-error" class="error-message" style="display: none;">Passwords do not match.</div>
+            <div id="password-match-error" class="error-message" style="display: none; margin-top: 6px;">Passwords do not match.</div>
           </div>
 
           <div id="student-id-field" class="form-group" style="display: block;">
             <div class="input-wrapper">
               <i class="fa fa-id-card input-icon-fa"></i>
-              <input type="text" id="student-id" name="student-id" class="input-field"
-                placeholder="Enter your student ID" required>
+              <input type="text" id="student-id" name="student-id" class="input-field" placeholder="Enter your student ID" required>
             </div>
           </div>
 
-          <button type="submit" class="login-button">Register</button>
-      </form>
+          <button type="submit" class="login-button">Create Account</button>
+        </form>
 
         <div class="signup-link">
           <span>Already have an account?</span>
@@ -226,47 +209,19 @@
       </div>
     </div>
   </div>
-  </div>
 
-  <!-- == Already Logged In Notification (Moved outside container) == -->
+  <!-- Already Logged In Overlay -->
   <div id="alreadyLoggedInOverlay" class="logged-in-overlay" style="display: none;">
     <div class="logged-in-box">
-        <div class="notification-icon"><i class="fa fa-check-circle"></i></div>
-        <h4>Welcome Back!</h4>
-        <p>Redirecting you to your dashboard...</p>
-        <div class="spinner"></div> 
+      <div class="notification-icon"><i class="fa fa-check-circle"></i></div>
+      <h4>Welcome Back!</h4>
+      <p>Redirecting you to your dashboard...</p>
+      <div class="spinner"></div> 
     </div>
   </div>
-  <!-- ============================================================ -->
 
-  <script src="../js/floating.js"></script>
-  <script>
-   
-     
-    // --- Functions from script (2).js (adapted) ---
-
-   
-    // Adapted for potentially multiple password fields (login + signup)
-    
-
-    function setupLoginForm() {
-      const form = document.getElementById('login-form'); // Use the original login form ID
-      if (!form) return;
-      const submitButton = form.querySelector('#loginBtn'); // Use the original button ID
-      if (!submitButton) return;
-    }
-
-    // --- Functions from original login.js (adapted) ---
-  
-    // Add the CSS animation keyframes directly here or ensure they are in the CSS file
-    
-
-  </script>
-    <!-- Load config.js first to define API_URL -->
-    <script src="../js/config.js"></script>
-    <!-- Then load login.js which uses API_URL -->
-    <script src="../js/login.js"></script>
-
+  <!-- Load API config first, then main login script -->
+  <script src="../js/config.js"></script>
+  <script src="../js/login.js"></script>
 </body>
-
 </html>

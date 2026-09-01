@@ -1,184 +1,93 @@
-// Mobile menu toggle
+// EazyAttend Landing Page Scripts
 document.addEventListener('DOMContentLoaded', function() {
+  // Navbar Elements
+  const navbar = document.querySelector('.navbar');
   const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-  const navContainer = document.querySelector('.nav-container');
-  const navLinks = document.querySelector('.nav-links');
-  const navActions = document.querySelector('.nav-actions');
-  const navLinksOriginalHTML = navLinks ? navLinks.innerHTML : '';
-  const navActionsHTML = navActions ? navActions.innerHTML : '';
-  
-  if (mobileMenuBtn && navContainer) {
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  // Navbar dynamic shadow on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.05)';
+      navbar.style.background = 'rgba(255, 255, 255, 0.92)';
+    } else {
+      navbar.style.boxShadow = 'none';
+      navbar.style.background = 'rgba(255, 255, 255, 0.82)';
+    }
+  });
+
+  // Mobile Menu Toggle
+  if (mobileMenuBtn && navbar) {
     const menuIcon = mobileMenuBtn.querySelector('i');
     mobileMenuBtn.addEventListener('click', () => {
-      mobileMenuBtn.classList.toggle('open');
-      navContainer.classList.toggle('open');
-      if (navContainer.classList.contains('open') && navLinks) {
-        navLinks.innerHTML = navLinksOriginalHTML + navActionsHTML;
-      } else if (navLinks) {
-        navLinks.innerHTML = navLinksOriginalHTML;
-      }
+      navbar.classList.toggle('active');
       if (menuIcon) {
         menuIcon.classList.toggle('fa-bars');
         menuIcon.classList.toggle('fa-times');
       }
     });
-  }
-  
-  // Add subtle animations for enhanced UX
-  const heroContent = document.querySelector('.hero-content');
-  if (heroContent) {
-    heroContent.style.opacity = '0';
-    heroContent.style.transform = 'translateY(20px)';
-    
-    setTimeout(() => {
-      heroContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-      heroContent.style.opacity = '1';
-      heroContent.style.transform = 'translateY(0)';
-    }, 300);
-  }
-  
-  // Animate feature cards on scroll
-  const featureCards = document.querySelectorAll('.feature-card');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animated');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  
-  featureCards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(card);
-  });
-  
-  // Add class when cards are in view
-  document.addEventListener('scroll', () => {
-    featureCards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-      }
-    });
-  });
-  
-  // Add hover effects to buttons
-  const buttons = document.querySelectorAll('button');
-  buttons.forEach(button => {
-    button.addEventListener('mouseenter', () => {
-      button.style.transform = 'translateY(-2px)';
-      button.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)';
-    });
-    
-    button.addEventListener('mouseleave', () => {
-      button.style.transform = 'translateY(0)';
-      button.style.boxShadow = '';
-    });
-  });
 
-  // Close mobile menu when a link is clicked (optional)
-  const mobileLinks = navLinks.querySelectorAll('a');
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
-      }
-    });
-  });
-
-  // --- Scroll Animation Logic --- 
-  const sectionsToAnimate = document.querySelectorAll('.scroll-animate');
-
-  if ('IntersectionObserver' in window && sectionsToAnimate.length > 0) {
-    const sectionObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Element is entering the viewport - Add visible class to animate
-          entry.target.classList.add('visible');
-        } else {
-          // Element is leaving the viewport
-          // Only remove 'visible' if it's scrolled *above* the viewport
-          // This prevents it from hiding again if you scroll past it downwards
-          if (entry.boundingClientRect.top > 0) {
-             entry.target.classList.remove('visible');
+    // Close menu when clicking navigation links
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navbar.classList.contains('active')) {
+          navbar.classList.remove('active');
+          if (menuIcon) {
+            menuIcon.classList.add('fa-bars');
+            menuIcon.classList.remove('fa-times');
           }
         }
       });
-    }, {
-        threshold: 0.1 // Trigger when 10% of the section is visible
-    });
-
-    sectionsToAnimate.forEach(section => {
-      sectionObserver.observe(section);
-    });
-  } else {
-    // Fallback for older browsers or if no elements found: just make them visible
-    sectionsToAnimate.forEach(section => {
-      section.classList.add('visible');
     });
   }
-  // --- End Scroll Animation Logic ---
 
-  // Smooth scrolling for navigation links
+  // Smooth scroll for anchor navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
+    anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
-        targetElement.scrollIntoView({
+        e.preventDefault();
+        const headerOffset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
           behavior: 'smooth'
         });
       }
     });
   });
 
-  // Scroll animations
-  const animatedElements = document.querySelectorAll('.scroll-animate');
-  const observerScroll = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      } // Optional: remove class when element leaves viewport
-      // else {
-      //   entry.target.classList.remove('visible');
-      // }
-    });
-  }, {
-    threshold: 0.1 // Trigger when 10% of the element is visible
-  });
-
-  animatedElements.forEach(el => {
-    observerScroll.observe(el);
-  });
-
-  // Mobile menu toggle
-  const mobileMenuButton = document.querySelector('.mobile-menu-btn');
-  const navbar = document.querySelector('.navbar');
-
-  if (mobileMenuButton && navbar) {
-    mobileMenuButton.addEventListener('click', () => {
-      navbar.classList.toggle('active');
-    });
-  }
-
-  // Close mobile menu when a link is clicked
-  const navLinksScroll = document.querySelectorAll('.nav-links a');
-  if (navLinksScroll && navbar) {
-    navLinksScroll.forEach(link => {
-      link.addEventListener('click', () => {
-        if (navbar.classList.contains('active')) {
-           navbar.classList.remove('active');
+  // Scroll Animation using IntersectionObserver
+  const sectionsToAnimate = document.querySelectorAll('.scroll-animate');
+  if ('IntersectionObserver' in window && sectionsToAnimate.length > 0) {
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    sectionsToAnimate.forEach(section => {
+      sectionObserver.observe(section);
+    });
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    sectionsToAnimate.forEach(section => {
+      section.classList.add('visible');
     });
   }
 
+  // Contact Form Submission Handler
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.getElementById('contact-form-status');
   const submitButton = document.getElementById('contact-submit-btn');
@@ -192,16 +101,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const subjectInput = document.getElementById('contact-subject');
       const messageInput = document.getElementById('contact-message');
 
-      // Basic Client-Side Validation
+      // Validation
       if (!nameInput.value.trim() || !emailInput.value.trim() || !subjectInput.value.trim() || !messageInput.value.trim()) {
-        formStatus.textContent = 'Please fill out all fields.';
-        formStatus.className = 'form-status-message error';
+        showStatus('Please fill out all fields.', 'error');
         return;
       }
 
       if (!isValidEmail(emailInput.value.trim())) {
-        formStatus.textContent = 'Please enter a valid email address.';
-        formStatus.className = 'form-status-message error';
+        showStatus('Please enter a valid email address.', 'error');
         return;
       }
 
@@ -212,20 +119,18 @@ document.addEventListener('DOMContentLoaded', function() {
         message: messageInput.value.trim()
       };
 
-      // Display loading state
-      formStatus.textContent = 'Sending your message...';
-      formStatus.className = 'form-status-message loading';
+      // Loading State
+      showStatus('Sending your message...', 'loading');
       submitButton.disabled = true;
-      submitButton.textContent = 'Sending...';
+      const originalButtonHTML = submitButton.innerHTML;
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Sending...</span>';
 
       try {
-        const apiUrl = '/auth/contact-submit'; // Changed from /api/contact-submit
-
         const response = await fetch(`${API_URL}/auth/contact-submit`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json' 
+            'Accept': 'application/json'
           },
           body: JSON.stringify(formData)
         });
@@ -233,28 +138,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const result = await response.json();
 
         if (response.ok && result.success) {
-          formStatus.textContent = result.message || 'Message sent successfully! We will get back to you soon.';
-          formStatus.className = 'form-status-message success';
-          contactForm.reset(); // Clear the form
+          showStatus(result.message || 'Message sent successfully! We will get back to you soon.', 'success');
+          contactForm.reset();
         } else {
-          formStatus.textContent = result.message || 'An error occurred. Please try again later.';
-          formStatus.className = 'form-status-message error';
+          showStatus(result.message || 'An error occurred. Please try again later.', 'error');
         }
       } catch (error) {
-        console.error('Contact form submission error:', error);
-        formStatus.textContent = 'A network error occurred. Please check your connection and try again.';
-        formStatus.className = 'form-status-message error';
+        console.error('Contact form error:', error);
+        showStatus('A network error occurred. Please check your connection and try again.', 'error');
       } finally {
         submitButton.disabled = false;
-        submitButton.textContent = 'Send Message';
+        submitButton.innerHTML = originalButtonHTML;
       }
     });
+
+    function showStatus(message, type) {
+      formStatus.textContent = message;
+      formStatus.className = `form-status-message ${type}`;
+    }
   }
 
-  // Helper function for email validation
   function isValidEmail(email) {
-    // Simple regex for basic email validation
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    return emailRegex.test(email);
+    return /^\S+@\S+\.\S+$/.test(email);
   }
 });

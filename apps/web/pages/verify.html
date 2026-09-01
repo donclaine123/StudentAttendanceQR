@@ -4,108 +4,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Email Verification</title>
+  <title>Email Verification - EazyAttend</title>
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Auth Stylesheet -->
   <link rel="stylesheet" href="../css/login.css">
+  <link rel="icon" href="data:," />
 </head>
 
 <body>
-  <div class="cyber-background">
-    <div class="grid-pattern"></div>
-    <div id="particles"></div>
-    <div class="gradient-overlay"></div>
-  </div>
-
+  <!-- Clean Back to Home Navigation Button -->
+  <a href="../index.html" class="home-button">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+      <rect x="5" y="5" width="90" height="90" rx="25" ry="25" fill="#4f46e5"/>
+      <rect x="25" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+      <rect x="55" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+      <rect x="25" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+      <rect x="55" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+    </svg>
+    <span>EazyAttend</span>
+  </a>
 
   <div class="auth-container">
     <div class="auth-header">
-      <svg class="sidebar-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="vertical-align: middle;">
-           <rect x="5" y="5" width="90" height="90" rx="25" ry="25" fill="#484b6a"/>
-           <rect x="25" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
-           <rect x="55" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
-           <rect x="25" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
-           <rect x="55" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="vertical-align: middle;">
+        <rect x="5" y="5" width="90" height="90" rx="25" ry="25" fill="#4f46e5"/>
+        <rect x="25" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+        <rect x="55" y="25" width="20" height="20" rx="4" ry="4" fill="white"/>
+        <rect x="25" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
+        <rect x="55" y="55" width="20" height="20" rx="4" ry="4" fill="white"/>
       </svg>
-      <span class="logo-text">EAZY<span>ATTEND</span></span>
+      <span class="logo-text-header">EazyAttend</span>
     </div>
+
     <div class="verification-content">
       <div id="verification-icon" class="verification-icon">
         <i class="fa fa-spinner fa-spin"></i>
       </div>
-      <h2 id="verification-status" class="verification-message">Verifying your email...</h2>
-      <p id="message" class="verification-note">Please wait...</p>
+      <h2 id="verification-status" class="verification-title">Verifying your email...</h2>
+      <p id="message" class="verification-note">Please wait while we verify your account token...</p>
     </div>
 
-    <script>
-      // Define API_URL directly to avoid module import issues
-      const isLocalDevelopment =
-        window.location.protocol === 'file:' ||
-        ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
-
-      const API_URL = isLocalDevelopment ? 'http://localhost:5000' : '/api';
-      
-      async function verifyEmail() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get("token");
-
-        if (!token) {
-          document.getElementById("verification-status").textContent = "Invalid Link";
-          document.getElementById("verification-status").style.color = "crimson";
-          const messageElement = document.getElementById("message");
-          messageElement.textContent = "Invalid verification link. Please request a new verification email.";
-          messageElement.classList.remove('success-message');
-          messageElement.classList.add('error-message');
-          return;
-        }
-
-        try {
-          // Use the API URL directly
-          const response = await fetch(`${API_URL}/auth/verify?token=${token}`, {
-            credentials: 'include'
-          });
-          
-          const data = await response.json();
-
-          if (data.success) {
-            document.getElementById("verification-status").textContent = "Verification Successful";
-            document.getElementById("verification-status").style.color = "green";
-            const messageElement = document.getElementById("message");
-            messageElement.textContent = "✅ Email verified! You can now log in.";
-            messageElement.classList.remove('error-message');
-            messageElement.classList.add('success-message');
-            setTimeout(() => {
-              window.location.href = "../pages/login.html";
-            }, 3000);
-          } else {
-            document.getElementById("verification-status").textContent = "Verification Failed";
-            document.getElementById("verification-status").style.color = "crimson";
-            const messageElement = document.getElementById("message");
-            messageElement.textContent = "❌ Verification failed or token expired.";
-            messageElement.classList.remove('success-message');
-            messageElement.classList.add('error-message');
-          }
-        } catch (error) {
-          console.error("Verification error:", error);
-          document.getElementById("verification-status").textContent = "Server Error";
-          document.getElementById("verification-status").style.color = "crimson";
-          const messageElement = document.getElementById("message");
-          messageElement.textContent = "⚠️ Server error. Please try again or contact support.";
-          messageElement.classList.remove('success-message');
-          messageElement.classList.add('error-message');
-        }
-      }
-
-      // Call the function to execute on page load
-      verifyEmail();
-    </script>
-    
-    <div class="auth-footer">
-      <button class="verification-btn" onclick="window.location.href='../pages/login.html'">Back to Login</button>
+    <div class="auth-footer" style="margin-top: 20px;">
+      <button class="verification-btn" onclick="window.location.href='../pages/login.html'">Proceed to Login</button>
     </div>
   </div>
 
-  <!-- == Include Floating JS for background effects == -->
-  <script src="../js/floating.js"></script>
-  <!-- =============================================== -->
-</body>
+  <script>
+    const isLocalDevelopment =
+      window.location.protocol === 'file:' ||
+      ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
 
+    const API_URL = isLocalDevelopment ? 'http://localhost:5000' : '/api';
+    
+    async function verifyEmail() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get("token");
+
+      if (!token) {
+        document.getElementById("verification-status").textContent = "Invalid Link";
+        document.getElementById("verification-icon").innerHTML = '<i class="fa fa-times-circle" style="color: #ef4444;"></i>';
+        const messageElement = document.getElementById("message");
+        messageElement.textContent = "Invalid verification link. Please request a new verification email.";
+        messageElement.classList.add('error-message');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/auth/verify?token=${token}`, {
+          credentials: 'include'
+        });
+        
+        const data = await response.json();
+
+        if (data.success) {
+          document.getElementById("verification-status").textContent = "Verification Successful!";
+          document.getElementById("verification-icon").innerHTML = '<i class="fa fa-check-circle" style="color: #22c55e;"></i>';
+          const messageElement = document.getElementById("message");
+          messageElement.textContent = "Email successfully verified! Redirecting to login in 3 seconds...";
+          messageElement.style.color = "#16a34a";
+          setTimeout(() => {
+            window.location.href = "../pages/login.html";
+          }, 3000);
+        } else {
+          document.getElementById("verification-status").textContent = "Verification Failed";
+          document.getElementById("verification-icon").innerHTML = '<i class="fa fa-times-circle" style="color: #ef4444;"></i>';
+          const messageElement = document.getElementById("message");
+          messageElement.textContent = data.message || "Verification failed or token expired.";
+          messageElement.classList.add('error-message');
+        }
+      } catch (error) {
+        console.error("Verification error:", error);
+        document.getElementById("verification-status").textContent = "Server Error";
+        document.getElementById("verification-icon").innerHTML = '<i class="fa fa-exclamation-triangle" style="color: #f59e0b;"></i>';
+        const messageElement = document.getElementById("message");
+        messageElement.textContent = "Network error occurred. Please try again later.";
+        messageElement.classList.add('error-message');
+      }
+    }
+
+    verifyEmail();
+  </script>
+</body>
 </html>
